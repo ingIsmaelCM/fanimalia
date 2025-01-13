@@ -1,0 +1,246 @@
+@import 'element-plus/dist/index.css';
+@import 'primeicons/primeicons.css';
+@import 'primevue/resources/themes/aura-light-green/theme.css';
+@import 'tailwind.css';
+@import 'quill.css';
+
+
+@layer base {
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
+
+@layer base {
+
+    .p-inputtext,
+    .p-component {
+        @apply text-primary font-medium;
+    }
+
+}
+
+
+#app {
+    height: 100dvh;
+    @apply bg-gradient-to-tl from-secondary to-dark;
+}
+
+*{
+    background-color: transparent;
+}
+
+:root {
+    --primary-color: #114084;
+    --el-color-primary: #114084;
+    --text-secondary-color: #3466aa;
+    --accent: #82b7dc;
+    --light: #f1f1f1;
+    --gray: #808080;
+    --dark: #1C1C1C;
+
+}
+
+
+body {
+    all: unset;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+
+
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-slate-400;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-primary;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-opacity-50;
+}
+
+::-webkit-scrollbar-thumb {
+    transition: background-color 0.2s ease;
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.el-table .cell {
+    line-height: normal;
+}
+
+.el-table__footer * {
+    @apply font-mono;
+}
+
+.el-table__header tr th {
+    @apply !bg-primary text-light;
+}
+
+.el-table__cell .cell {
+    @apply transition-all duration-500 ease-in-out text-base;
+}
+
+.el-table__cell:not(.is-leaf) {
+    @apply !py-1.5;
+}
+
+.el-table__cell.is-leaf .cell {
+    @apply !flex !justify-between !items-center;
+}
+
+
+*:focus:not(:focus-visible) {
+    outline: 0 !important;
+    box-shadow: none !important;
+}
+
+.slide-fade-enter-active {
+    transition: all 0.2s ease-out;
+}
+
+.slide-fade-leave-active {
+    transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+    transform: translateX(20px);
+    opacity: 0;
+}
+
+.p-dropdown.no-arrow .p-dropdown-trigger,
+.p-multiselect.no-arrow .p-multiselect-trigger {
+    display: none;
+}
+
+.p-accordion .p-accordion-content,
+.p-accordion .p-accordion-header .p-accordion-header-link {
+    padding: 0.75rem 0;
+}
+
+.el-table-filter__list {
+    max-height: 300px !important;
+    overflow-y: auto !important;
+    padding: 0 !important;
+}
+
+.el-table-filter__list .el-table-filter__list-item:first-child:not(.is-active) {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: #fff;
+}
+
+.m-input-input,
+.m-input-wrapper {
+    @apply !ring-0 !outline-none my-0.5 !border-none !py-0 !bg-transparent;
+}
+
+.m-input-label {
+    display: none;
+}
+
+.m-input-wrapper.maz-border-danger .m-input-input {
+    @apply !text-red-500;
+}
+
+.gmap-autocomplete {
+    @apply p-inputtext p-component w-full m-0 py-2 px-3 shadow-sm ring-1 ring-inset ring-offset-0 rounded-md appearance-none outline-none;
+}
+
+.pac-container {
+    z-index: 9999;
+}
+
+.el-tabs__new-tab {
+    @apply hover:scale-105 relative;
+    @apply items-center justify-center inline-flex text-center align-bottom;
+    @apply rounded-full;
+    @apply transition duration-200 ease-in-out cursor-pointer overflow-hidden select-none;
+    @apply bg-transparent border-none text-primary !w-6 !text-xl mx-2;
+}
+
+.p-checkbox-box:has(.iconify) {
+    @apply !w-5 !h-5 !border-none !pb-2 !bg-transparent;
+}
+
+.p-inplace-content {
+    @apply flex items-center;
+}
+
+.p-inplace .p-inplace-display {
+    @apply p-0;
+}
+
+
+.p-tabview-panels {
+    @apply !bg-transparent h-[90%];
+}
+
+.p-tabview-nav-container {
+    @apply !sticky !top-0 !z-50;
+}
+
+.p-image-toolbar {
+    @apply !text-light;
+}
+
+.p-tabview-nav {
+    @apply w-[300%] md:w-[100%]
+}
+
+.p-tabview-header.p-highlight {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.cell.highlight {
+    @apply !text-accent;
+}
+
+.column-filter-trigger .el-icon{
+    @apply !text-light;
+}
+
+.cell.highlight{
+    @apply !text-light underline underline-offset-4;
+}
+
+/* .el-table__empty-block {
+    max-height: 15rem;
+}
+ */
+
+ .ql-editor{
+     @apply !resize-y min-h-[120px];
+     max-height: inherit;
+ }
+
+ .radial-blur{
+     @apply !bg-dark;
+     -webkit-mask: radial-gradient(circle, #0000 150px, rgba(0, 0, 0, 0.9) 160px);
+     mask: radial-gradient(circle, #0000 150px, rgba(0, 0, 0, 0.9) 160px);
+ }

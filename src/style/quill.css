@@ -1,0 +1,80 @@
+.p-editor-toolbar {
+    display: none;
+}
+
+/* tbody:hover > tr:not(:hover){
+    filter: blur(2px);
+    opacity: 0.5;
+} */
+
+.ql-container {
+    font-size: 1rem /* 16px */ !important;
+    line-height: 1.5rem /* 24px */ !important;
+}
+
+.ql-container ol {
+    list-style-type: decimal;
+    list-style-position: inside;
+    padding-left: 0.5rem /* 2px */;
+}
+
+.ql-container ul {
+    list-style-type: disc;
+    list-style-position: inside;
+}
+
+.ql-container li {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.ql-container blockquote {
+    border-left-width: 4px;
+    border-left-style: solid;
+    border-left-color: #d1d5db /* gray-300 */;
+    margin-left: 1rem /* 4px */;
+    padding-left: 0.5rem /* 2px */;
+}
+
+.ql-container pre {
+    font-size: 0.875rem /* 14px */ !important;
+    font-family: monospace !important;
+}
+
+.ql-container .ql-code-block-container {
+    padding: 0.5rem /* 2px */;
+    margin: 0.25rem /* 1px */;
+    background-color: #f3f4f6 /* gray-100 */;
+    counter-reset: line;
+    padding-left: 0;
+}
+
+.ql-container .ql-code-block:before {
+    counter-increment: line;
+    content: counter(line);
+    display: inline-block;
+    border-right: 2px solid #d1d5db /* gray-300 */;
+    padding: 0 0.5em;
+    margin-right: 0.5em;
+}
+
+.ql-container .ql-code-block {
+    font-size: 0.875rem /* 14px */ !important;
+    font-family: monospace !important;
+}
+
+.ql-container .ql-align-justify {
+    text-align: justify;
+}
+
+.ql-container .ql-align-center {
+    text-align: center;
+}
+
+.ql-container .ql-align-right {
+    text-align: right;
+}
+
+.ql-container .ql-align-left {
+    text-align: left;
+}

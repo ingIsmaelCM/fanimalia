@@ -1,8 +1,8 @@
 <template>
-    <el-carousel class="w-full" motion-blur :height="isMobile ? '20rem' : '38rem'" indicator-position="none"  :type="isMobile ? '' : 'card'"
+    <el-carousel class="w-full h-full"  motion-blur indicator-position="none"  :type="isMobile ? '' : 'card'"
     :autoplay="false">
         <el-carousel-item v-for="animal in animals" :key="animal._id">
-            <div class="w-full max-w-screen-2xl h-full md:h-[38rem] shadow-xl rounded-xl border border-gray-700 
+            <div class="w-full max-w-screen-2xl h-full  shadow-xl rounded-xl border border-gray-700 
             flex flex-col md:flex-row justify-end md:items-end md:justify-start 
             bg-cover  bg-no-repeat bg-top relative overflow-hidden hover:scale-105 transition-all duration-500 ease-in-out"
                 :style="{ backgroundImage: `url(${animal.photos[0]? useGlobalStore().getImage(animal.photos[0]) : useGlobalStore().getImage(animal.category?.image)})` }">

@@ -244,3 +244,15 @@ body {
      -webkit-mask: radial-gradient(circle, #0000 150px, rgba(0, 0, 0, 0.9) 160px);
      mask: radial-gradient(circle, #0000 150px, rgba(0, 0, 0, 0.9) 160px);
  }
+
+ .el-carousel--horizontal {
+    align-items: center;
+    display: flex;
+    position: relative;
+    padding: 1.5rem auto;
+ }
+
+ .el-carousel__container{
+    height: 90%;
+    position: initial;
+ }

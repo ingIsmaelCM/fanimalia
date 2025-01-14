@@ -1,9 +1,11 @@
 <template>
-    <div class="flex flex-col items-center space-y-4 md:space-y-8 ">
-        <HomeBanner :animals="animals" />
-        <Carousel :value="categories" :numVisible="isMobile ? 2 : 5" :numScroll="1"  class="w-full" :show-indicators="false" :show-navigators="false"
-        :autoplayInterval="6000" autoplay circular>
-            <template #item="{data}">
+    <div class="flex flex-col space-y-4 md:space-y-8  min-h-[20rem]  max-h-[48rem]  ">
+        <div class="h-[65%] md:py-8  min-h-[16rem]">
+            <HomeBanner :animals="animals" />
+        </div>
+        <Carousel :value="categories" :numVisible="isMobile ? 2 : 7" :numScroll="1" class="w-full h-[35%]"
+            :show-indicators="false" :show-navigators="false" :autoplayInterval="6000" autoplay circular>
+            <template #item="{ data }">
                 <CategoryCard :key="data._id" :category="data" />
             </template>
         </Carousel>

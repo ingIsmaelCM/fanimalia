@@ -1,0 +1,16 @@
+.parallax {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 90dvh;
+    mask-image: linear-gradient(black 5%, transparent);
+}
+
+.difuse{
+    mask-image: linear-gradient( to right, black 50%, transparent);
+}
+
+.in-home-logo{
+    filter: brightness(0) saturate(100%) invert(40%) sepia(94%) saturate(700%) hue-rotate(5deg) brightness(91%) contrast(101%);
+}

@@ -1,7 +1,7 @@
 
 
 <template>
-   <router-view class="overflow-hidden size-full max-w-screen-2xl mx-auto text-primary p-4" 
+   <router-view class="overflow-hidden size-full  mx-auto text-primary" 
       />
 </template>
 

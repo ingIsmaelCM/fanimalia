@@ -3,6 +3,7 @@
 @import 'primevue/resources/themes/aura-light-green/theme.css';
 @import 'tailwind.css';
 @import 'quill.css';
+@import 'components.css';
 
 
 @layer base {

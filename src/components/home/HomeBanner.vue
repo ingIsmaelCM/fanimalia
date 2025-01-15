@@ -1,11 +1,13 @@
 <template>
-    <el-carousel class="w-full h-full"  motion-blur indicator-position="none"  :type="isMobile ? '' : 'card'"
+    <el-carousel class="w-full h-full min-h-96" indicator-position="none"  :type="isMobile ? '' : 'card'"
     :autoplay="false">
-        <el-carousel-item v-for="animal in animals" :key="animal._id">
+        <el-carousel-item v-for="animal in animals" :key="animal._id"   @click="emit('onSelectAnimal', animal._id)">
             <div class="w-full max-w-screen-2xl h-full  shadow-xl rounded-xl border border-gray-700 
             flex flex-col md:flex-row justify-end md:items-end md:justify-start 
             bg-cover  bg-no-repeat bg-top relative overflow-hidden hover:scale-105 transition-all duration-500 ease-in-out"
-                :style="{ backgroundImage: `url(${animal.photos[0]? useGlobalStore().getImage(animal.photos[0]) : useGlobalStore().getImage(animal.category?.image)})` }">
+              >
+                <el-image :src="useGlobalStore().getImage(animal.photos?.[0]|| animal.category?.image)" 
+                fit="cover" class="absolute top-0 left-0 w-full h-full object-cover z-0" loading="lazy"/> 
                 <div class="absolute top-0 left-0 w-full h-full bg-dark bg-opacity-70 z-10 blur"></div>
                 <div class="p-4 md:p-8 flex flex-col justify-center items-start  max-w-2xl z-20">
                     <h1 class="text-2xl md:text-4xl font-bold text-center text-accent">
@@ -32,4 +34,5 @@ interface Props {
 }
 defineProps<Props>();
 const isMobile = inject('isMobile');
+const emit = defineEmits(['onSelectAnimal']);
 </script>

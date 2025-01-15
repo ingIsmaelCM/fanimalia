@@ -1,9 +1,8 @@
 <template>
-    <div class="card">
-        <Menubar :model="items">
+        <Menubar :model="items" class="!bg-transparent !ring-0 !border-0 !shadow-none">
             <template #start>
                 <router-link v-ripple class="flex align-items-center" to="/">
-                    <img :src="logo" alt="logo" class="h-6 md:h-8" />
+                    <img :src="logo" alt="logo" class="h-6 md:h-8 " :class="{ 'in-home-logo': $route.path === '/home' }" />
                 </router-link>
             </template>
             <template #item="{ item, props }">
@@ -24,15 +23,12 @@
                 </div>
             </template>
         </Menubar>
-    </div>
 </template>
 
 <script setup lang="ts">
 import logo from "@/assets/logo.png";
-import useCategory from "@/services/category.service";
 import {  inject, onMounted, ref } from "vue";
 
-const { getCategories, categories } = useCategory();
 const isMobile = inject('isMobile');
 
 const items = ref([
@@ -66,8 +62,6 @@ const items = ref([
 ]);
 
 onMounted(() => {
-    getCategories().then(() => {
-        console.log(categories.value)
-    })
+   
 })
 </script>

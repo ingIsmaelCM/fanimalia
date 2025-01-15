@@ -4,7 +4,7 @@ import { ref, Ref } from "vue";
 import QueryService from "./query.service";
 
 export default function useAnimal() {
-    const animalRepo=new AnimalRepository();
+    const animalRepo = new AnimalRepository();
     const query = new QueryService();
 
     const animals: Ref<Animal[]> = ref([]);
@@ -13,11 +13,13 @@ export default function useAnimal() {
 
 
     const getAnimals = async () => {
-        console.log(query.parsed.value)
-       return await animalRepo.get(query.parsed.value).then((res) => {
-           animals.value = res.data.rows;
-           return res.data.rows;
-       })
+        return await animalRepo.get(query.parsed.value).then((res) => {
+            if (query.parsed.value.includes('sortBy=random')) {
+                res.data.rows.sort(() => Math.random() - 0.5);
+            }
+            animals.value = res.data.rows;
+            return res.data.rows;
+        })
     }
 
     return {

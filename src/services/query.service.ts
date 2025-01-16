@@ -19,8 +19,7 @@ export default class QueryService {
     sortOrder: SortOrder.asc,
     search: "",
     page: 0,
-    pageSize: 0,
-    limit: 1000,
+    pageSize: 1000,
   });
 
   private _pagination: Ref<IPagination> = ref({

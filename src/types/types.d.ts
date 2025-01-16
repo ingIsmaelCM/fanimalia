@@ -23,17 +23,6 @@ export type IFilterDate = {
     label: string;
 }
 
-export type Rule = {
-    required?: ValidationRuleWithParams,
-    minLength?: ValidationRuleWithParams,
-    maxLength?: ValidationRuleWithParams,
-    isIn?: ValidationRuleWithParams,
-    email?: ValidationRuleWithParams,
-    isPhone?: ValidationRuleWithParams,
-    minValue?: ValidationRuleWithParams,
-    maxValue?: ValidationRuleWithParams,
-    isValidDependency?: ValidationRuleWithParams
-}
 
 export type CommonFields = {
     _id: ObjectId;
@@ -133,13 +122,6 @@ export type ParsedIssue = {
 }
 
 
-export type Address = {
-    country: string
-    city: string
-    lat: number
-    lng: number
-    street: string
-}
 
 export type Step = {
     target: string
@@ -154,17 +136,6 @@ export type CurrentModal = {
 
 
 
-
-export type Permission = ICommonField & {
-    id: string
-    name: string
-    key: string
-    label: string
-    module: string
-    origin: string
-    userPermissionId: string
-    rolePermissionId: string
-}
 
 export type APIResponse<T> = {
     count: number
@@ -250,22 +221,59 @@ export type Token = {
     expiresAt: Date;
 }
 
+export type CommonFields = {
+    _id: ObjectId;
+    createdAt: Date;
+    updatedAt: Date;
+    createdBy: ObjectId;
+    updatedBy: ObjectId;
+    deletedAt?: Date;
+    deletedBy?: ObjectId;
+}
+
+
+export type User = CommonFields & {
+    email: string;
+    password: string;
+    username: string;
+    avatar: string;
+    role: UserRole;
+}
+
+export type Token = {
+    _id: ObjectId;
+    token: string;
+    userId: ObjectId;
+    createdAt: Date;
+    expiresAt: Date;
+}
+
 export type Animal = CommonFields & {
     name: string;
     scientific_name: string;
     description: string;
-    photos: string[];
-    habitatId: ObjectId;
-    dietId: ObjectId;
+    image: string;
+    photos: Photo[];
+    habitat: Habitat;
+    diet: Diet;
+    taxonomy: Taxonomy;
+    reproduction: Reproduction;
     categoryId: ObjectId;
-    predatorsId: ObjectId[];
-    preysId: ObjectId[];
     status: AnimalStatus;
     status_source: string;
     status_reason: string;
     status_date: Date;
+    preysId: ObjectId[];
+    predatorsId: ObjectId[];
     relatedIds: ObjectId[];
-    category: Category;
+}
+
+
+export type Photo = {
+    name: string;
+    size: number;
+    extension: string;
+    url: string;
 }
 
 export type Category = CommonFields & {
@@ -274,18 +282,17 @@ export type Category = CommonFields & {
     image: string;
 }
 
-export type Taxonomy = CommonFields & {
+export type Taxonomy = {
    kingdom: string;
    phylum: string;
    class: string;
    order: string;
    family: string;
    genus: string;
-   species: string;
-   animalId: ObjectId;
+   specie: string;
 }
 
-export type Habitat = CommonFields & {
+export type Habitat =  {
     name: string;
     description: string;
     location: string;
@@ -295,21 +302,18 @@ export type Habitat = CommonFields & {
     image: string;
 }
 
-export type Diet = CommonFields & {
+export type Diet = {
    type: DietType;
    food_items: string[];
-   animalId: ObjectId;
    feeding_behavior: string;
 }
 
-export type Reproduction = CommonFields & {
+export type Reproduction = {
     type: ReproductionType;
     gestation_period: string;
     matting_season: Season;
     offspring_per_birth: number;
-    parental_care: string;
-    animalId: ObjectId;
+    parental_care: string
 }
-
 
 

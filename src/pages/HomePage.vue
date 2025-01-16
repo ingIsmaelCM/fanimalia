@@ -2,7 +2,7 @@
     <div class="grid grid-cols-1 gap-8 py-8 pt-[18rem] md:pt-[30rem]   relative ">
 
         <div class="parallax absolute top-0 left-0 w-full h-1/2 flex p-8 md:pt-[14dvh]" :key="animal._id">
-            <el-image :src="useGlobalStore().getImage(animal.photos?.[0] || animal.category?.image)" fit="cover"
+            <el-image :src="useGlobalStore().getImage(animal.photos?.[0]?.url || animal.category?.image)" fit="cover"
                 class="fixed top-0 left-0 w-full z-0" loading="lazy" />
             <div class="flex flex-col " >
                 <div class="absolute top-0 left-0 w-full h-full bg-dark bg-opacity-80 z-10 difuse "></div>

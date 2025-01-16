@@ -23,4 +23,10 @@ export const animalRules: Partial<Record<keyof Animal, Rule>> = {
     photos: {
 
     },
+    image :{
+        maxLength: helpers.withMessage("La imagen no puede tener más de 150 caracteres", maxLength(150)),
+    },
+    categoryId: {
+        required: helpers.withMessage("La categoría es requerida", required)
+    },
 }

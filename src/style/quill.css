@@ -1,11 +1,14 @@
+.ql-editor{
+    background-color: transparent !important;
+}
+.ql-editor *{
+    color: #f3f4f6;
+}
+
 .p-editor-toolbar {
     display: none;
 }
 
-/* tbody:hover > tr:not(:hover){
-    filter: blur(2px);
-    opacity: 0.5;
-} */
 
 .ql-container {
     font-size: 1rem /* 16px */ !important;

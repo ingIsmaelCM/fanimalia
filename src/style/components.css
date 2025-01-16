@@ -4,7 +4,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     height: 90dvh;
-    mask-image: linear-gradient(black 5%, transparent);
+    mask-image: linear-gradient(black 0%, transparent);
 }
 
 .difuse{

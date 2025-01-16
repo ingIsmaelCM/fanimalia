@@ -12,9 +12,6 @@ export default {
       },
 
       // Colors
-      "text-gray-900 dark:text-gray-200",
-      "placeholder:text-gray-400 dark:placeholder:text-gray-300",
-      "bg-gray-50 dark:bg-gray-800",
       "shadow-sm",
       {
         "ring-1 ring-inset ring-gray-300 dark:ring-gray-700 ring-offset-0":

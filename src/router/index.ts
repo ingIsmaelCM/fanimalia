@@ -1,5 +1,6 @@
 
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import animalRoutes from "./animals";
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -35,6 +36,7 @@ const routes: Array<RouteRecordRaw> = [
           name: "danger",
           component: () => import("@/pages/DangerPage.vue"),
         },
+        ...animalRoutes
         
       ],
     },

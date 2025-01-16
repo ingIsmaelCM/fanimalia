@@ -19,6 +19,7 @@
                     <span class="line-clamp-2 mt-4 text-lg md:text-xl">
                         {{ animal.description }}
                     </span>
+                    
                 </div>
             </div>
         </el-carousel-item>

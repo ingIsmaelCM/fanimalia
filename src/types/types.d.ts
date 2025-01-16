@@ -23,6 +23,18 @@ export type IFilterDate = {
     label: string;
 }
 
+export type Rule = {
+    required?: ValidationRuleWithParams,
+    minLength?: ValidationRuleWithParams,
+    maxLength?: ValidationRuleWithParams,
+    isIn?: ValidationRuleWithParams,
+    email?: ValidationRuleWithParams,
+    isPhone?: ValidationRuleWithParams,
+    minValue?: ValidationRuleWithParams,
+    maxValue?: ValidationRuleWithParams,
+    isValidDependency?: ValidationRuleWithParams
+}
+
 export type CommonFields = {
     _id: ObjectId;
     createdAt: Date;
@@ -222,25 +234,38 @@ export type Token = {
     expiresAt: Date;
 }
 
+export type User = CommonFields & {
+    email: string;
+    password: string;
+    username: string;
+    avatar: string;
+    role: UserRole;
+}
+
+export type Token = {
+    _id: ObjectId;
+    token: string;
+    userId: ObjectId;
+    createdAt: Date;
+    expiresAt: Date;
+}
+
 export type Animal = CommonFields & {
     name: string;
     scientific_name: string;
     description: string;
     photos: string[];
-    taxonomyId: ObjectId;
     habitatId: ObjectId;
     dietId: ObjectId;
     categoryId: ObjectId;
     predatorsId: ObjectId[];
     preysId: ObjectId[];
-    reproductionId: ObjectId;
     status: AnimalStatus;
     status_source: string;
     status_reason: string;
     status_date: Date;
     relatedIds: ObjectId[];
-    photos: string[];
-    category?: Category;
+    category: Category;
 }
 
 export type Category = CommonFields & {
@@ -248,4 +273,43 @@ export type Category = CommonFields & {
     description: string;
     image: string;
 }
+
+export type Taxonomy = CommonFields & {
+   kingdom: string;
+   phylum: string;
+   class: string;
+   order: string;
+   family: string;
+   genus: string;
+   species: string;
+   animalId: ObjectId;
+}
+
+export type Habitat = CommonFields & {
+    name: string;
+    description: string;
+    location: string;
+    climate: HabitatClimate;
+    type: HabitatType;
+    elevation_range: [number, number];
+    image: string;
+}
+
+export type Diet = CommonFields & {
+   type: DietType;
+   food_items: string[];
+   animalId: ObjectId;
+   feeding_behavior: string;
+}
+
+export type Reproduction = CommonFields & {
+    type: ReproductionType;
+    gestation_period: string;
+    matting_season: Season;
+    offspring_per_birth: number;
+    parental_care: string;
+    animalId: ObjectId;
+}
+
+
 

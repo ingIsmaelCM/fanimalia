@@ -5,7 +5,7 @@
             <!-- set transition for router view -->
             <router-view v-slot="{ Component }" class="w-full overflow-auto  h-[100dvh] " id="container"
                 @scroll="handleScroll" :class="{ 'pt-16 md:pt-20': $route.path != '/home' }">
-                <div class="fixed top-0 z-50 w-full " ref="navbar">
+                <div class="fixed top-0 z-50 w-full transition-all duration-500 ease-in-out" id="navbarDiv" ref="navbar">
                     <NavBar />
                 </div>
                 <section>
@@ -26,11 +26,15 @@ const navbar: Ref<HTMLElement | null> = ref(null);
 
 const handleScroll = () => {
     const container = document.getElementById("container");
+    const homeParallax = document.getElementById("home-parallax");
     const scrollY =container?.scrollTop || 0;
     const maxOpacity = 1; 
     const opacity = Math.min(scrollY / 500, maxOpacity); // Ajusta '500' según el scroll deseado
     if (navbar.value) {
         navbar.value.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`;
+    }
+    if (homeParallax) {
+        homeParallax.style.opacity = `${1-(opacity*1.5)}`;
     }
 };
 

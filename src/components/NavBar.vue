@@ -9,14 +9,14 @@
             <router-link v-slot="{ href, navigate }" :to="item.route" custom 
                 v-if="(!item.onlyMobile || isMobile) && !hasSubmenu">
                 <a v-ripple :href="href" v-bind="props.action" @click="navigate"
-                    :class="{ 'text-accent bg-secondary rounded-md bg-opacity-50': $route.path.includes(item.route)}">
+                    :class="{ 'text-accent bg-secondary rounded-md bg-opacity-50': $route.meta.key === item.key}">
                     <Icon :icon="item.icon" class="text-2xl" />
                     <span class="ml-2">{{ item.label }}</span>
                 </a>
             </router-link>
             <span v-else-if="hasSubmenu">
                 <a v-ripple v-bind="props.action"
-                    :class="{ 'text-accent bg-secondary rounded-md bg-opacity-50': $route.path.includes(item.route) }">
+                    :class="{ 'text-accent bg-secondary rounded-md bg-opacity-50': $route.meta.key === item.key }">
                     <Icon :icon="item.icon" class="text-2xl" />
                     <span class="ml-2">{{ item.label }}</span>
                 </a>
@@ -44,7 +44,7 @@ const opacityNavbar = (state: boolean) => {
     const navbarDiv = document.getElementById("navbarDiv");
     if (navbarDiv) {
         if (state) {
-            navbarDiv.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+            navbarDiv.style.backgroundColor = "rgba(0, 0, 0, 1)";
         } else {
             navbarDiv.style.backgroundColor = "rgba(0, 0, 0, 0)";
         }
@@ -55,23 +55,27 @@ const items = ref([
     {
         label: 'Animales',
         icon: 'mdi:pets',
-        route: '/animals'
+        route: '/animals',
+        key: 'animals'
     },
     {
         label: 'Categorías',
         icon: 'mdi:tag-multiple',
-        route: '/categories'
+        route: '/categories',
+        key: 'categories'
     },
     {
         label: 'Hábitats',
         icon: 'mdi:leaf',
-        route: '/habitats'
+        route: '/habitats',
+        key: 'habitats'
 
     },
     {
         label: 'En Peligro',
         icon: 'mdi:alert-circle',
-        route: '/danger'
+        route: '/danger',
+        key: 'danger'
     },
     {
         label: 'Administrar',
@@ -80,22 +84,20 @@ const items = ref([
             {
                 label: 'Animales',
                 icon: 'mdi:pets',
-                route: '/admin/animals'
+                route: '/admin/animals',
+                key: 'create_animal'
             },
             {
                 label: 'Categorias',
                 icon: 'mdi:tag-multiple',
-                route: '/admin/categories'
-            },
-            {
-                label: 'Habitats',
-                icon: 'mdi:leaf',
-                route: '/admin/habitats'
+                route: '/admin/categories',
+                key: 'create_category'
             },
             {
                 label: "Usuarios",
                 icon: "mdi:account-multiple",
-                route: "/admin/users"
+                route: "/admin/users",
+                key: 'users'
             }
         ]
     },

@@ -7,8 +7,9 @@ const animalRoutes: Array<RouteRecordRaw> = [
         name: 'admin_animals',
         component: () => import('@/pages/admin/CreateAnimal.vue'),
         meta: {
-            title: 'Animales',
-            icon: 'mdi:pets'
+            title: 'Registro de Animal',
+            icon: 'mdi:pets',
+            key: 'create_animal'
         }
     },
     {
@@ -16,8 +17,9 @@ const animalRoutes: Array<RouteRecordRaw> = [
         name: 'animal',
         component: () => import('@/pages/AnimalPage.vue'),
         meta: {
-            title: 'Animales',
-            icon: 'mdi:pets'
+            title: 'Detalles del Animal',
+            icon: 'mdi:pets',
+            key: 'animals'
         }
     }
 ]

@@ -1,10 +1,11 @@
+
 <template>
   <span @click="openDialog = !openDialog"
     :class="{ 'pointer-events-none text-gray cursor-not-allowed opacity-60': disabled }">
     <slot name="button" />
   </span>
 
-  <Dialog  :dismissable="!!dismissable"
+  <Dialog  :dismissable="!!dismissable" class="bg-transparent" headerClass="bg-transparent"
     v-bind="$attrs" :draggable="true" v-model:visible="openDialog" :modal="!showBack">
     <template #header>
       <span class="font-semibold text-gray text-lg md:text-xl px-2">{{ title  }}</span>

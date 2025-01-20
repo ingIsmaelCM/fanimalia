@@ -1,5 +1,5 @@
 import { useGlobalStore } from "@/stores";
-import axios, { InternalAxiosRequestConfig } from "axios";
+import axios from "axios";
 
 const api = axios.create({
   baseURL: import.meta.env.DEV
@@ -10,6 +10,8 @@ const api = axios.create({
     "Content-Type": "application/json",
   },
 });
+
+api.defaults.withCredentials = true;
 
 
 api.interceptors.response.use(

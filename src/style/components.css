@@ -7,10 +7,57 @@
     mask-image: linear-gradient(black 0%, transparent);
 }
 
+.parallax-animal{
+    background-attachment: fixed;
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
 .difuse{
     mask-image: linear-gradient( to right, black 50%, transparent);
 }
 
+.parallax-animal .difuse{
+  mask-image: linear-gradient( to right, black 60%, transparent);
+}
+
+/* MEdia query for mobile */
+@media (max-width: 768px) {
+    .parallax-animal{
+        background-attachment: scroll;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+        mask-image: linear-gradient(black 0%, transparent);
+    }
+    .parallax-animal .difuse{
+      mask-image: linear-gradient(  transparent, black 60%);
+    }
+} 
+
 .in-home-logo{
     filter: brightness(0) saturate(100%) invert(40%) sepia(94%) saturate(700%) hue-rotate(5deg) brightness(91%) contrast(101%);
 }
+
+/* HTML: <div class="loader"></div> */
+.loader {
+    height: 50px;
+    aspect-ratio: 2;
+    border: 10px solid transparent;
+    box-sizing: border-box;
+    background: 
+      radial-gradient(farthest-side,#fff 98%,#0000) left/20px 20px,
+      radial-gradient(farthest-side,#fff 98%,#0000) left/20px 20px,
+      radial-gradient(farthest-side,#fff 98%,#0000) center/20px 20px,
+      radial-gradient(farthest-side,#fff 98%,#0000) right/20px 20px,
+      transparent;
+    background-repeat: no-repeat;
+    animation: l14 1s infinite;
+  }
+  @keyframes l14 {
+    100%  {background-position:right,left,center,right}
+  }
+

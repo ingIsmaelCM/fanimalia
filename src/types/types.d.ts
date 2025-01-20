@@ -6,6 +6,7 @@ import { TSkill } from "@/repositories/skill.repository";
 import { TAcademic } from "@/repositories/academic.repository";
 import { TJob } from "@/repositories/job.repository";
 import { TStudy } from "@/repositories/study.repository";
+import { AnimalStatus, DietType, HabitatClimate, HabitatType, ReproductionType, UserRole } from "./enums";
 
 export type SummaryMethodProps<T> = {
     columns: IColumns[];
@@ -21,6 +22,17 @@ export type IFilter = {
 export type IFilterDate = {
     field: string;
     label: string;
+}
+
+export type IAuth ={
+  username: string;
+  password: string;
+  rememberMe: boolean;
+}
+
+export type IRegister = Omit<IAuth, 'rememberMe'> & {
+  email: string;
+  role: UserRole;
 }
 
 
@@ -181,12 +193,12 @@ export type QueryOperator = 'eq' | 'neq' | 'gt' | 'lt' | 'in' | 'gte' | 'lte' | 
 export type QueryJuntion = 'and' | 'or' | '';
 
 // field:value:operator:junction
-export type FilterString = `${string}:${string|number|boolean}:${QueryOperator}:${QueryJuntion}`;
+export type FilterString = `${string}:${string | number | boolean}:${QueryOperator}:${QueryJuntion}`;
 
 
 
 
-export type QueryParams ={
+export type QueryParams = {
     fields?: string;
     page?: number;
     pageSize?: number;
@@ -266,7 +278,10 @@ export type Animal = CommonFields & {
     preysId: ObjectId[];
     predatorsId: ObjectId[];
     relatedIds: ObjectId[];
+    category: Category;
 }
+
+
 
 
 export type Photo = {
@@ -283,16 +298,17 @@ export type Category = CommonFields & {
 }
 
 export type Taxonomy = {
-   kingdom: string;
-   phylum: string;
-   class: string;
-   order: string;
-   family: string;
-   genus: string;
-   specie: string;
+    _id: string;
+    phylum: string;
+    class: string;
+    order: string;
+    family: string;
+    genus: string;
+    specie: string;
 }
 
-export type Habitat =  {
+export type Habitat = {
+    _id: string;
     name: string;
     description: string;
     location: string;
@@ -303,12 +319,14 @@ export type Habitat =  {
 }
 
 export type Diet = {
-   type: DietType;
-   food_items: string[];
-   feeding_behavior: string;
+    _id: string;
+    type: DietType;
+    food_items: string[];
+    feeding_behavior: string;
 }
 
 export type Reproduction = {
+    _id: string;
     type: ReproductionType;
     gestation_period: string;
     matting_season: Season;
@@ -317,3 +335,12 @@ export type Reproduction = {
 }
 
 
+type AnimalKeys = {
+    [K in keyof Animal]: Animal[K] extends object ? keyof Animal[K] : never;
+};
+
+
+type Selectable<T> = {
+    value: T;
+    label: string;
+}

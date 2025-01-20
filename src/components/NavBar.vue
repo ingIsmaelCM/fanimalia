@@ -1,20 +1,21 @@
 <template>
-    <Menubar :model="items" class="!bg-transparent !ring-0 !border-0 !shadow-none">
-        <template #start>
+    <Menubar :model="items" class="!bg-transparent !ring-0 !border-0 !shadow-none" id="menuBar">
+        <template v-if="!isMobile" #start>
             <router-link v-ripple class="flex align-items-center" to="/">
                 <img :src="logo" alt="logo" class="h-6 md:h-8 " :class="{ 'in-home-logo': $route.path === '/home' }" />
             </router-link>
+
         </template>
         <template #item="{ item, props, hasSubmenu }">
-            <router-link v-slot="{ href, navigate }" :to="item.route" custom 
-                v-if="(!item.onlyMobile || isMobile) && !hasSubmenu">
+            <router-link v-slot="{ href, navigate }" :to="item.route" custom
+                v-if="(!item.onlyMobile || isMobile) && !hasSubmenu && !item.hidden">
                 <a v-ripple :href="href" v-bind="props.action" @click="navigate"
-                    :class="{ 'text-accent bg-secondary rounded-md bg-opacity-50': $route.meta.key === item.key}">
+                    :class="{ 'text-accent bg-secondary rounded-md bg-opacity-50': $route.meta.key === item.key }">
                     <Icon :icon="item.icon" class="text-2xl" />
                     <span class="ml-2">{{ item.label }}</span>
                 </a>
             </router-link>
-            <span v-else-if="hasSubmenu">
+            <span v-else-if="hasSubmenu && !item.hidden">
                 <a v-ripple v-bind="props.action"
                     :class="{ 'text-accent bg-secondary rounded-md bg-opacity-50': $route.meta.key === item.key }">
                     <Icon :icon="item.icon" class="text-2xl" />
@@ -23,12 +24,22 @@
             </span>
 
         </template>
-        <template v-if="!isMobile" #end>
-            <div class="flex align-items-center gap-2">
+        <template #end>
+            <div class="flex items-center space-x-4 ">
                 <InputText placeholder="Search" type="text" class="hidden xl:block md:w-96  bg-transparent text-primary ring-primary ring-opacity-40
                 placeholder:text-primary placeholder:text-opacity-80 focus:ring-2 focus:ring-opacity-60 rounded-md"
                     @focus="opacityNavbar(true)" @blur="opacityNavbar(false)" />
-                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+                <AuthContainer v-if="!useUserStore().getToken">
+                    <template #button>
+                        <Avatar shape="circle"
+                            class="cursor-pointer md:hover:scale-105 transition-all ease-in-out bg-secondary" >
+                            <template #icon>
+                                <IconAction action="add" icon="mdi:account-circle-outline" class=" text-4xl" />
+                            </template>
+                        </Avatar>
+                    </template>
+                </AuthContainer>
+                <ProfileComponent v-else />
             </div>
         </template>
     </Menubar>
@@ -36,7 +47,11 @@
 
 <script setup lang="ts">
 import logo from "@/assets/logo.png";
-import { inject, onMounted, ref } from "vue";
+import { computed, inject, onMounted } from "vue";
+import AuthContainer from "./auth/AuthContainer.vue";
+import { useUserStore } from "@/stores";
+import { UserRole } from "@/types/enums";
+import ProfileComponent from "./auth/ProfileComponent.vue";
 
 const isMobile = inject('isMobile');
 
@@ -51,13 +66,21 @@ const opacityNavbar = (state: boolean) => {
     }
 };
 
-const items = ref([
+const items = computed(() => [
+    {
+        label: 'Inicio',
+        icon: 'mdi:home',
+        route: '/home',
+        key: 'home',
+        onlyMobile: true
+    },
     {
         label: 'Animales',
         icon: 'mdi:pets',
         route: '/animals',
         key: 'animals'
     },
+
     {
         label: 'Categorías',
         icon: 'mdi:tag-multiple',
@@ -80,6 +103,7 @@ const items = ref([
     {
         label: 'Administrar',
         icon: 'mdi:cog',
+        hidden: !Boolean(useUserStore().getToken) || useUserStore().getUser?.role !== UserRole.admin,
         items: [
             {
                 label: 'Animales',
@@ -100,12 +124,6 @@ const items = ref([
                 key: 'users'
             }
         ]
-    },
-    {
-        label: 'Mi Perfil',
-        icon: 'mdi:account-circle',
-        route: '/profile',
-        onlyMobile: true
     }
 ]);
 

@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import Cookies from "js-cookie";
 
 export const useUserStore = defineStore("user", {
   state: () => {
@@ -12,12 +13,17 @@ export const useUserStore = defineStore("user", {
   actions: {
     setUser(user: any) {
       this.user = user;
+      if(!user){
+        this.removeUser();
+        return;
+      }
       localStorage[import.meta.env.VITE_LOCAL_USER_NAME] =
         JSON.stringify(user);
     },
     setToken(token: any) {
       this.token = token;
       localStorage[import.meta.env.VITE_LOCAL_TOKEN_NAME] = token;
+      Cookies.set('apiKey', token);
     },
 
     removeUser() {

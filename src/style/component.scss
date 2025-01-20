@@ -1,0 +1,21 @@
+
+  .text-loader {
+    $length: str-length(attr(data-text));
+    span {
+        animation: textLoaderAnimation #{$length*.1}s linear infinite;
+        @for $i from 1 through $length {    
+          &:nth-child(#{$i+1}) {
+            animation-delay: #{$i*.1}s;
+          }
+        }
+      }
+  }
+  @keyframes textLoaderAnimation {
+    0%, 100% {
+        opacity: 0;
+      }
+      50% {
+       opacity: 1;
+      }
+  }
+  

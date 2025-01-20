@@ -2,6 +2,8 @@ import AnimalRepository from "@/repositories/animal.repository"
 import { Animal } from "@/types/types";
 import { ref, Ref } from "vue";
 import QueryService from "./query.service";
+import utils from "@/types/helpers/utils";
+import { useToast } from "primevue/usetoast";
 
 export default function useAnimal() {
     const animalRepo = new AnimalRepository();
@@ -11,14 +13,43 @@ export default function useAnimal() {
     const animal: Ref<Animal> = ref({} as Animal);
     const newAnimal: Ref<Animal> = ref({} as Animal);
 
+    const toast = useToast();
 
     const getAnimals = async () => {
+        
         return await animalRepo.get(query.parsed.value).then((res) => {
             if (query.parsed.value.includes('sortBy=random')) {
                 res.data.rows.sort(() => Math.random() - 0.5);
             }
             animals.value = res.data.rows;
             return res.data.rows;
+        }).catch((err) => {
+            utils.toastError(toast, 'Error al obtener los animales');
+            throw err;
+        })
+    }
+
+    const saveAnimal = async () => {
+        return await animalRepo.save(newAnimal.value).then((res) => {
+            animal.value = res.data.row;
+            utils.toastSucess(toast, 'Animal registrado exitosamente');
+            return res.data.row;
+        }).catch((err) => {
+            utils.toastError(toast, 'Error al registrar el animal');
+            console.log(err);
+            return err;
+        })
+    }
+
+    const findAnimal = async (id: string) => {
+        query.include('category');
+        return await animalRepo.find(id, query.parsed.value).then((res) => {
+            animal.value = res.data;
+            return res.data;
+        }).catch((err) => {
+            utils.toastError(toast, 'Error al obtener el animal');
+            console.log(err);
+            return err;
         })
     }
 
@@ -27,6 +58,8 @@ export default function useAnimal() {
         animal,
         newAnimal,
         query,
-        getAnimals
+        getAnimals,
+        saveAnimal,
+        findAnimal
     }
 }

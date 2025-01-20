@@ -32,7 +32,7 @@ const iconProps = computed(() => {
         case 'add':
             return {
                 icon: props.icon || 'mdi:playlist-plus',
-                class: 'text-2xl text-teal-600 text-opacity-90 hover:text-opacity-100'
+                class: 'text-2xl text-primary text-opacity-90 hover:text-opacity-100'
             }
         case 'download':
             return {

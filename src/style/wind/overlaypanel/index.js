@@ -11,8 +11,6 @@ export default {
       "z-40 transform origin-center",
 
       // Color
-      "bg-gray-50 dark:bg-gray-700",
-      "text-gray-700 dark:text-gray-200/80",
       "dark:border-gray-700",
 
       // Before: Triangle

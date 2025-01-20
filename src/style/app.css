@@ -1,10 +1,11 @@
 @import 'element-plus/dist/index.css';
+@import 'maz-ui/styles';
 @import 'primeicons/primeicons.css';
 @import 'primevue/resources/themes/aura-light-green/theme.css';
 @import 'tailwind.css';
 @import 'quill.css';
 @import 'components.css';
-
+@import 'component.scss';
 
 @layer base {
 
@@ -257,3 +258,5 @@ body {
     height: 90%;
     position: initial;
  }
+
+ 

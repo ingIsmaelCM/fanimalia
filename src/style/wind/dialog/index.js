@@ -45,8 +45,8 @@ export default {
       "rounded-tr-lg",
 
       // Colors
-      "bg-gray-50 dark:bg-gray-700",
-      "text-gray-700 dark:text-gray-200",
+      "bg-secondary",
+      "text-primary",
     ],
   },
   title: {
@@ -158,8 +158,8 @@ export default {
       },
 
       // Colors
-      "bg-gray-50 dark:bg-gray-700",
-      "text-gray-600 dark:text-gray-200",
+      "bg-secondary",
+      "text-primary",
 
       // Misc
       "overflow-y-auto",
@@ -182,8 +182,8 @@ export default {
       "rounded-b-lg",
 
       // Colors
-      "bg-gray-50 dark:bg-gray-700",
-      "text-gray-700 dark:text-gray-200/80",
+      "bg-secondary",
+      "text-primary",
     ],
   },
   mask: ({ props }) => ({

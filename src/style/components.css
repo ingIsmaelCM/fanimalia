@@ -7,12 +7,24 @@
     mask-image: linear-gradient(black 0%, transparent);
 }
 
+.image-header{
+  mask-image: linear-gradient(black 0%, transparent);
+}
+
 .parallax-animal{
     background-attachment: fixed;
     background-position: left;
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
+}
+
+.parallax-details{
+  background-attachment: fixed;
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: cover;
+  mask-image: linear-gradient(transparent, black 0%);
 }
 
 .difuse{

@@ -6,9 +6,9 @@
             flex flex-col md:flex-row justify-end md:items-end md:justify-start 
             bg-cover  bg-no-repeat bg-top relative overflow-hidden hover:scale-105 transition-all duration-500 ease-in-out"
               >
-                <el-image :src="useGlobalStore().getImage(animal.image|| animal.category?.image)" 
-                fit="cover" class="absolute top-0 left-0 w-full h-full object-cover z-0" loading="lazy"/> 
-                <div class="absolute top-0 left-0 w-full h-full bg-dark bg-opacity-70 z-10 blur"></div>
+                <el-image :src="animal.image" 
+                fit="cover" class="absolute top-0 left-0 w-full h-full object-cover z-0 vt-name[prueba]" loading="lazy"/> 
+                <div class="absolute top-0 left-0 w-full h-full bg-dark bg-opacity-70 z-10 "></div>
                 <div class="p-4 md:p-8 flex flex-col justify-center items-start  max-w-2xl z-20">
                     <h1 class="text-2xl md:text-4xl font-bold text-center text-accent">
                         {{ animal.name }}
@@ -25,14 +25,13 @@
     </el-carousel>
 </template>
 <script setup lang="ts">
-import { useGlobalStore } from '@/stores';
 import { Animal } from '@/types/types';
 import { inject } from 'vue';
 
 interface Props {
     animals: Animal[]
 }
-defineProps<Props>();
+withDefaults(defineProps<Props>(), { animals: () => [{} as Animal] });  
 const isMobile = inject('isMobile');
 const emit = defineEmits(['onSelectAnimal']);
 </script>

@@ -3,7 +3,7 @@
         <span @click="showAuthOverlay">
             <slot name="button" />
         </span>
-        <OverlayPanel ref="authOverlay" appendTo="#menuBar" :dismissable="false" >
+        <OverlayPanel ref="authOverlay" appendTo="#menuBar" :dismissable="true" >
             <transition v-if="isLogincomponent" name="slide-fade" mode="out-in" appear class="size-full p-4 bg-secondary rounded-xl" >
                 <component class="" :is="LoginComponent" @ToggleComponent="toggleComponent(false)"  />
             </transition>

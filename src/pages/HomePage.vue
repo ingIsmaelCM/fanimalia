@@ -1,8 +1,8 @@
 <template>
-    <div class="   relative " :class="animals.length?'pt-[18rem] md:pt-[30rem] grid grid-cols-1 gap-8 py-8':'flex flex-col justify-center items-center  px-4 md:px-8 '">
+    <div class="   relative  pt-[18rem] md:pt-[30rem] grid grid-cols-1 gap-8 py-8">
         <div class="parallax absolute top-0 left-0 w-full h-1/2 flex py-4 md:p-8 md:pt-[14dvh]" v-if="animal._id" :key="animal._id">
-            <el-image :src="useGlobalStore().getImage(animal.image || animal.category?.image)" fit="cover"
-                class="fixed top-0 left-0 w-full z-0" loading="lazy" />
+            <el-image :src="animal.image" fit="cover"
+                class="fixed top-0 left-0 w-full h-screen z-0 image" loading="lazy" />
             <div class="flex flex-col ">
                 <div class="absolute top-0 left-0 w-full h-full bg-dark bg-opacity-80 z-10 difuse "></div>
                 <div class="p-4 pt-8 md:p-8 flex flex-col justify-center items-start  max-w-xl  z-20"
@@ -26,7 +26,7 @@
                 </div>
             </div>
         </div>
-        <div class=" md:py-8 " v-if="animals.length">
+        <div class=" md:py-8 " >
             <HomeBanner :animals="animals" @onSelectAnimal="onSelectAnimal" />
         </div>
         <div class="grid grid-cols-2 md:grid-cols-7 gap-4 w-full">

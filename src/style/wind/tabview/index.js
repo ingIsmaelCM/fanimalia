@@ -31,7 +31,7 @@ export default {
       "rounded-none",
 
       // Colors
-      "text-primary-500 dark:text-primary-400",
+      "text-primary",
       "shadow-md",
     ],
   },
@@ -50,14 +50,14 @@ export default {
       "rounded-none",
 
       // Colors
-      "text-primary-500 dark:text-primary-400",
+      "text-primary",
       "shadow-md",
     ],
   },
   nav: {
     class: [
       // Flexbox
-      "flex flex-1 justify-evenly",
+      "flex flex-1 justify-start space-x-4",
 
       // Spacing
       "list-none",
@@ -68,11 +68,11 @@ export default {
     ],
   },
   tabpanel: {
-   
+
     header: ({ props }) => ({
       class: [
         // Spacing
-        "mr-0",
+        "m-0 p-0",
 
         // Misc
         {
@@ -102,35 +102,24 @@ export default {
 
         // Colors and Conditions
         {
-          "border-transparent":
+          "bg-transparent text-primary border-transparent":
             parent.state.d_activeIndex !== context.index,
-          "bg-gray-50 dark:bg-gray-700":
-            parent.state.d_activeIndex !== context.index,
-          "text-gray dark:text-gray-200/80":
-            parent.state.d_activeIndex !== context.index,
+          "text-primary font-bold border-accent bg-accent":
+            parent.state.d_activeIndex === context.index,
 
-          "bg-primay bg-opacity-20":
-            parent.state.d_activeIndex === context.index,
-          "!border-primary":
-            parent.state.d_activeIndex === context.index,
-          "text-primary":
-            parent.state.d_activeIndex === context.index,
         },
 
         // States
         "focus-visible:outline-none focus-visible:outline-offset-0 focus-visible:ring-2 focus-visible:ring-inset",
         "focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400",
         {
-          "hover:bg-gray-50 dark:hover:bg-gray-700":
+          "hover:bg-accent hover:border-secondary hover:text-secondary":
             parent.state.d_activeIndex !== context.index,
-          "hover:border-primary dark:hover:border-gray-600":
-            parent.state.d_activeIndex !== context.index,
-          "hover:text-gray-900 dark:hover:text-gray-200":
-            parent.state.d_activeIndex !== context.index,
+          
         },
 
         // Transitions
-        "transition-all duration-200",
+        "transition-all duration-500",
 
         // Misc
         "cursor-pointer select-none text-decoration-none",
@@ -149,12 +138,12 @@ export default {
     content: {
       class: [
         // Spacing
-        "h-full",
+        "h-full w-full",
         // Shape
         "rounded-b-md",
 
         // Colors
-        "text-gray-700 dark:text-gray-200/80",
+        "text-primary",
         "border-0",
       ],
     },

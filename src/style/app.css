@@ -31,7 +31,7 @@
     @apply bg-gradient-to-tl from-secondary to-dark;
 }
 
-*{
+* {
     background-color: transparent;
 }
 
@@ -196,7 +196,7 @@ body {
 
 
 .p-tabview-panels {
-    @apply !bg-transparent h-[90%];
+    @apply !bg-transparent h-[90%] px-0;
 }
 
 .p-tabview-nav-container {
@@ -223,11 +223,11 @@ body {
     @apply !text-accent;
 }
 
-.column-filter-trigger .el-icon{
+.column-filter-trigger .el-icon {
     @apply !text-light;
 }
 
-.cell.highlight{
+.cell.highlight {
     @apply !text-light underline underline-offset-4;
 }
 
@@ -236,27 +236,34 @@ body {
 }
  */
 
- .ql-editor{
-     @apply !resize-y min-h-[120px];
-     max-height: inherit;
- }
+.ql-editor {
+    @apply !resize-y min-h-[120px];
+    max-height: inherit;
+}
 
- .radial-blur{
-     @apply !bg-dark;
-     -webkit-mask: radial-gradient(circle, #0000 150px, rgba(0, 0, 0, 0.9) 160px);
-     mask: radial-gradient(circle, #0000 150px, rgba(0, 0, 0, 0.9) 160px);
- }
+.radial-blur {
+    @apply !bg-dark;
+    -webkit-mask: radial-gradient(circle, #0000 150px, rgba(0, 0, 0, 0.9) 160px);
+    mask: radial-gradient(circle, #0000 150px, rgba(0, 0, 0, 0.9) 160px);
+}
 
- .el-carousel--horizontal {
+.el-carousel--horizontal {
     align-items: center;
     display: flex;
     position: relative;
     padding: 1.5rem auto;
- }
+}
 
- .el-carousel__container{
+.el-carousel__container {
     height: 90%;
     position: initial;
- }
+}
 
- 
+.image {
+    view-transition-name: image;
+}
+
+::view-transition-group(image) {
+    transition: transform 0.6s ease-in-out;
+    transform-origin: center;
+}

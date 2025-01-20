@@ -49,7 +49,7 @@ export default {
     return Number(number.toFixed(precision));
   },
 
- 
+
   shortNumber: (number: number) => {
     return new Intl.NumberFormat("en-US", {
       notation: "compact",
@@ -57,10 +57,10 @@ export default {
   },
   formatStorage: function (size: number, unit: 'MB' | 'GB' | 'TB' | 'KB' = 'MB') {
     const sizes = {
-      KB: size/(1*10**3) ,
-      MB: size/(1*10**6),
-      GB: size / (1*10**9),
-      TB: size / (1*10**12)
+      KB: size / (1 * 10 ** 3),
+      MB: size / (1 * 10 ** 6),
+      GB: size / (1 * 10 ** 9),
+      TB: size / (1 * 10 ** 12)
     }
     let shortValue = this.shortNumber(sizes[unit]);
     if (sizes[unit] < 1) {
@@ -87,7 +87,7 @@ export default {
     return `${str[0].toUpperCase()}${str.substring(1)}`;
   },
 
-  
+
 
   getDistanceBetween: async (target: [number, number], origin?: [number, number], unit?: string): Promise<any> => {
 
@@ -132,12 +132,12 @@ export default {
     const diffInMonths = diffTime / (1000 * 60 * 60 * 24 * 30);
     const diffInYears = diffTime / (1000 * 60 * 60 * 24 * 365);
     const result = {
-      days: diffInDays.toFixed(2) + (Number(diffInDays)>1) ? ' días' : ' día',
-      hours: diffInHours.toFixed(2) + (Number(diffInHours)>1) ? ' horas' : ' hora',
-      minutes: diffDaysInMinutes.toFixed(2) + (Number(diffDaysInMinutes)>1) ? ' minutos' : ' minuto',
-      weeks: diffInWeeks.toFixed(2) + (Number(diffInWeeks)>1) ? ' semanas' : ' semana',
-      months: diffInMonths.toFixed(2) + (Number(diffInMonths)>1) ? ' meses' : ' mes',
-      years: diffInYears.toFixed(2) + (Number(diffInYears)>1) ? ' años' : ' año',
+      days: diffInDays.toFixed(2) + (Number(diffInDays) > 1) ? ' días' : ' día',
+      hours: diffInHours.toFixed(2) + (Number(diffInHours) > 1) ? ' horas' : ' hora',
+      minutes: diffDaysInMinutes.toFixed(2) + (Number(diffDaysInMinutes) > 1) ? ' minutos' : ' minuto',
+      weeks: diffInWeeks.toFixed(2) + (Number(diffInWeeks) > 1) ? ' semanas' : ' semana',
+      months: diffInMonths.toFixed(2) + (Number(diffInMonths) > 1) ? ' meses' : ' mes',
+      years: diffInYears.toFixed(2) + (Number(diffInYears) > 1) ? ' años' : ' año',
     }
     return result[unit];
   },
@@ -257,6 +257,18 @@ export default {
 
   getLocalWithPrefix(key: string) {
     return localStorage.getItem(import.meta.env.VITE_LOCAL_PREFIX + key);
+  },
+
+  linkFromString(str: string) {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const match = str.match(urlRegex);
+    if (match) {
+      const url = match[0];
+      const text = str.replace(urlRegex, '').trim() || url;
+      return `<a href="${url}" target="_blank" class="hover:text-accent hover:underline hover:font-normal " rel="noopener noreferrer">${text}</a>`;
+    } else {
+      return `<span>${str||'Sin información'}</span>`;
+    }
   },
 };
 

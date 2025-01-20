@@ -25,7 +25,7 @@ export default {
 
         // Color
         "bg-transparent",
-        "text-gray-900 dark:text-gray-200",
+        "text-primary",
 
         // States
         "focus:outline-none focus:outline-offset-0 focus-visible:ring-2 focus-visible:ring-primary-600 ring-inset dark:focus-visible:ring-primary-500", // Focus
@@ -48,7 +48,7 @@ export default {
         "!p-0",
 
         // Color
-        "text-gray-600 dark:text-gray-200",
+        "text-primary",
       ],
     },
     transition: {

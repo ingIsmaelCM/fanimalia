@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import { ConfirmationOptions } from "primevue/confirmationoptions";
 import { ToastServiceMethods } from "primevue/toastservice";
 import { Ref } from "vue";
+import { AnimalStatus } from "../enums";
 let timer: any;
 
 export default {
@@ -167,7 +168,7 @@ export default {
 
   },
 
-  debounce: (fn: Function, wait: number) => {
+  debounce: (fn: Function, wait: number = 500) => {
     return function (...args: any[]) {
       if (timer) {
         clearTimeout(timer);
@@ -267,9 +268,39 @@ export default {
       const text = str.replace(urlRegex, '').trim() || url;
       return `<a href="${url}" target="_blank" class="hover:text-accent hover:underline hover:font-normal " rel="noopener noreferrer">${text}</a>`;
     } else {
-      return `<span>${str||'Sin información'}</span>`;
+      return `<span>${str || 'Sin información'}</span>`;
     }
   },
+
+  getDangerLevel: (status: AnimalStatus): number => {
+    return {
+      [AnimalStatus.extinct]: 10,
+      [AnimalStatus.extinct_in_the_wild]: 9,
+      [AnimalStatus.critically_endangered]: 8,
+      [AnimalStatus.endangered]: 7,
+      [AnimalStatus.vulnerable]: 6,
+      [AnimalStatus.least_concerned]: 5,
+      [AnimalStatus.near_threatened]: 4,
+      [AnimalStatus.data_deficient]: 3,
+      [AnimalStatus.not_evaluated]: 2,
+      [AnimalStatus.not_endagered]: 1,
+    }[status] || 0;
+  },
+  getDangerIcon: (level: number): { color: string, icon: string } => {
+    if (level <= 3) return {
+      color: 'text-green-500',
+      icon: 'mdi:check-all'
+    }
+    if (level <= 6) return {
+      color: 'text-yellow-500',
+      icon: 'mdi:warning-outline'
+    }
+    return {
+      color: 'text-red-500',
+      icon: 'mdi:dangerous'
+    }
+
+  }
 };
 
 function calculateDistance(target: [number, number], origin: [number, number]) {

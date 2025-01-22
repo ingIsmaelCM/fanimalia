@@ -32,12 +32,10 @@ export default {
       "rounded",
 
       // Color
-      "border-gray-200 dark:border-gray-700",
+      "border-gray-500",
       {
-        "text-gray-600 dark:text-gray-200": !context?.selected,
-        "bg-gray-50 dark:bg-gray-700": !context?.selected,
-        "text-gray-700 dark:text-gray-200": context?.selected,
-        "bg-gray-50 dark:bg-gray-700": context?.selected,
+        "text-primary bg-transparent": !context?.selected,
+        "text-accent bg-transparent": context?.selected,
       },
 
       // States

@@ -1,6 +1,7 @@
 
 <template>
   <span @click="openDialog = !openDialog"
+  class="w-full"
     :class="{ 'pointer-events-none text-gray cursor-not-allowed opacity-60': disabled }">
     <slot name="button" />
   </span>

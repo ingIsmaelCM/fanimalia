@@ -2,7 +2,9 @@ import { DietType } from "@/types/enums";
 import { Diet, Rule } from "@/types/types";
 import { helpers, maxLength, required } from "@vuelidate/validators";
 
-export const dietRules: Partial<Record<keyof Diet, Rule>> = {
+export const dietRules: Record<keyof Diet, Rule> = {
+    _id: {
+    },
     type: {
         isIn: helpers.withMessage("Tipo de dieta no válido", (value: string) => {
             return Object.values(DietType).includes(value as DietType)

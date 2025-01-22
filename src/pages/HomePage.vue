@@ -1,21 +1,18 @@
 <template>
     <div class="   relative  pt-[18rem] md:pt-[30rem] grid grid-cols-1 gap-8 py-8">
-        <div class="parallax absolute top-0 left-0 w-full h-1/2 flex py-4 md:p-8 md:pt-[14dvh]" v-if="animal._id" :key="animal._id">
-            <el-image :src="animal.image" fit="cover"
-                class="fixed top-0 left-0 w-full h-screen z-0 image" loading="lazy" />
-            <div class="flex flex-col ">
+        <div class="parallax absolute top-0 left-0 w-full h-1/2 flex py-4 md:p-8 md:pt-[14dvh]" v-if="animal._id"
+            :key="animal._id">
+            <el-image :src="animal.image" fit="cover" class="fixed top-0 left-0 w-full h-screen z-0 image"
+                loading="lazy" />
+            <div class="flex flex-col pt-8 md:pt-0">
                 <div class="absolute top-0 left-0 w-full h-full bg-dark bg-opacity-80 z-10 difuse "></div>
                 <div class="p-4 pt-8 md:p-8 flex flex-col justify-center items-start  max-w-xl  z-20"
                     id="home-parallax">
-                    <router-link v-if="animal._id" :to="{ name: 'animal', params: { id: animal._id } }"
-                        class="my-4 ml-auto z-40 top-4 hover:scale-110 transition-all duration-500 ease-in-out">
-                        <Button size="large" class="w-full max-w-xs !bg-accent text-primary uppercase font-bold px-8">
-                            Ver detalles
-                        </Button>
+                    <router-link :to="{ name: 'animal', params: { id: animal._id } }" class="hover:underline">
+                        <h1 class="text-2xl md:text-4xl font-bold text-center text-accent">
+                            {{ animal.name }}
+                        </h1>
                     </router-link>
-                    <h1 class="text-2xl md:text-4xl font-bold text-center text-accent">
-                        {{ animal.name }}
-                    </h1>
                     <h1 class="text-xl md:text-2xl font-semibold italic text-center shadow-xl">
                         {{ animal.scientific_name }}
                     </h1>
@@ -26,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <div class=" md:py-8 " >
+        <div class=" md:py-8 ">
             <HomeBanner :animals="animals" @onSelectAnimal="onSelectAnimal" />
         </div>
         <div class="grid grid-cols-2 md:grid-cols-7 gap-4 w-full">
@@ -40,7 +37,6 @@ import CategoryCard from '@/components/home/CategoryCard.vue';
 import HomeBanner from '@/components/home/HomeBanner.vue';
 import useAnimal from '@/services/animal.service';
 import useCategory from '@/services/category.service';
-import { useGlobalStore } from '@/stores';
 import { Animal } from '@/types/types';
 import { inject, onBeforeMount, ref, Ref } from 'vue';
 

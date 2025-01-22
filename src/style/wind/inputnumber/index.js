@@ -58,9 +58,9 @@ export default {
         },
 
         // Colors
-        "text-gray-900 dark:text-gray-200",
+        "text-primary",
         "placeholder:text-gray-400 dark:placeholder:text-gray-300",
-        "bg-gray-50 dark:bg-gray-800",
+        "bg-transparent",
         {
           "border-r border-gray-300 dark:border-gray-700":
             parent.props.showButtons && parent.props.buttonLayout == "stacked",

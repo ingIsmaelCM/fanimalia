@@ -10,7 +10,7 @@ export default {
       { "w-full": props.multiple },
 
       // Color
-      "text-gray-900 dark:text-gray-200",
+      "text-primary",
 
       //States
       {
@@ -39,9 +39,9 @@ export default {
       "appearance-none rounded-md",
 
       // Color
-      "text-gray-900 dark:text-gray-200",
-      "bg-gray-50 dark:bg-gray-700",
-      "placeholder:text-gray-400 dark:placeholder:text-gray-300",
+      "text-primary",
+      "bg-transparent",
+      "placeholder:text-gray-400 ",
       "shadow-sm",
 
       // States
@@ -84,9 +84,9 @@ export default {
       { "py-1.5 px-3": !props.multiple, "p-0": props.multiple },
 
       // Colors
-      "text-gray-700 dark:text-gray-200",
+      "text-primary",
       {
-        "bg-gray-50 dark:bg-gray-700": !props.multiple,
+        "bg-transparent dark:bg-gray-700": !props.multiple,
         "border border-gray-300 dark:border-gray-700": !props.multiple,
         "border-0 bg-transparent": props.multiple,
       },
@@ -113,8 +113,8 @@ export default {
       "rounded-[1.14rem]",
 
       // Colors
-      "text-gray-700 dark:text-gray-200/70",
-      "bg-gray-200 dark:bg-gray-700",
+      "text-primary",
+      "bg-transparent",
     ],
   },
   label: {
@@ -154,12 +154,12 @@ export default {
         "-ml-[1px]",
 
         // Colors
-        "text-gray-600 dark:text-gray-100",
-        "bg-gray-100 dark:bg-gray-700",
+        "text-primary",
+        "bg-transparent",
         "ring-1 ring-inset ring-gray-300 dark:ring-gray-700",
 
         // States
-        "hover:bg-gray-200 dark:hover:bg-gray-700",
+        "hover:bg-secondary",
         "focus:outline-none focus:outline-offset-0 focus:ring-1",
         "focus:ring-primary-500 dark:focus:ring-primary-400",
       ],
@@ -185,8 +185,8 @@ export default {
       "overflow-auto",
 
       // Color
-      "bg-gray-50 dark:bg-gray-700",
-      "text-gray-800 dark:text-gray-200",
+      "bg-dark",
+      "text-primary",
       "ring-1 ring-inset ring-gray-300 dark:ring-gray-700",
     ],
   },
@@ -213,15 +213,15 @@ export default {
 
       // Color
       {
-        "text-gray-700 dark:text-gray-200":
+        "text-primary":
           !context.focused && !context.selected,
       },
       {
-        "bg-gray-200 dark:bg-gray-600/60 text-gray-700 dark:text-gray-200":
+        "bg-secondary text-accent":
           context.focused && !context.selected,
       },
       {
-        "bg-blue-300 dark:bg-primary-400 text-gray-200 dark:text-gray-700":
+        "bg-secondary text-accent":
           context.focused && context.selected,
       },
       {
@@ -230,7 +230,7 @@ export default {
       },
 
       //States
-      "hover:bg-blue-300 dark:hover:bg-primary-400 hover:text-gray-800 dark:hover:text-gray-700",
+      "hover:bg-secondary hover:text-accent",
 
       // Misc
       "cursor-pointer",
@@ -266,7 +266,7 @@ export default {
       "py-2 px-4",
 
       // Color
-      "text-gray-800 dark:text-gray-200",
+      "text-primary",
       "bg-transparent",
     ],
   },

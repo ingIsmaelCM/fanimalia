@@ -1,4 +1,5 @@
 import { useUserStore } from "@/stores";
+import { UserRole } from "@/types/enums";
 
  class AuthMiddleware {
   constructor() {
@@ -13,21 +14,6 @@ import { useUserStore } from "@/stores";
     }
   }
 
-  userPermissions(): Array<String> {
-    return useUserStore().getUser?.permissions?.map((p) => p.name) || [];
-  }
-
-  hasPermission(permission: string): boolean {
-    return this.userPermissions().some((perm) => perm === permission);
-  }
-
-  public hasAnyPermission(permissions: string[]): boolean {
-    return permissions.some((p) => this.hasPermission(p));
-  }
-
-  hasAllPermissions(permissions: string[]): boolean {
-    return permissions.every((p) => this.hasPermission(p));
-  }
 
   isAuth() {
     try {
@@ -39,13 +25,40 @@ import { useUserStore } from "@/stores";
       return false;
     }
   }
+
+  isAdmin() {
+     return useUserStore().getUser?.role === UserRole.admin
+  }
+
+  isViewer() {
+    return useUserStore().getUser?.role === UserRole.viewer
+  }
+
+  isEditor() {
+    return useUserStore().getUser?.role === UserRole.editor
+  }
+
+  hasAnyRole(roles: UserRole[]) {
+    return roles.includes(useUserStore().getUser?.role)
+  }
+
+  hasRole(role: UserRole) {
+    return useUserStore().getUser?.role === role
+  }
+
+  hastAllRoles(roles: UserRole[]) {
+    return roles.every((role) => useUserStore().getUser?.role === role)
+  }
 }
 
 
 export default new AuthMiddleware();
 
 const mid=new AuthMiddleware();
-export const can=(permission:string)=>mid.hasPermission(permission);
-export const canAny=(permissions:string[])=>mid.hasAnyPermission(permissions);
-export const canAll=(permissions:string[])=>mid.hasAllPermissions(permissions);
 export const isAuth=()=>mid.isAuth();
+export const isAdmin=()=>mid.isAdmin();
+export const isViewer=()=>mid.isViewer();
+export const isEditor=()=>mid.isEditor();
+export const hasAnyRole=(roles:UserRole[])=>mid.hasAnyRole(roles);
+export const hasRole=(role:UserRole)=>mid.hasRole(role);
+export const hastAllRoles=(roles:UserRole[])=>mid.hastAllRoles(roles);

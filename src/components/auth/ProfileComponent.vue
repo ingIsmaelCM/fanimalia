@@ -1,11 +1,11 @@
 <template>
-    <div id="profile">
+    <div id="profile" class="relative w-full md:w-max">
       <Button @click="toggleOverlay" severity="contrast" rounded>
         <MazAvatar :caption="useUserStore().getUser?.username" roundedSize="full"
           class="rounded-full " size="0.6rem" />
       </Button>
   
-      <OverlayPanel ref="oProfile" id="oProfile" :model="items" popup>
+      <OverlayPanel ref="oProfile" id="oProfile" :model="items" popup appendTo="#menuBar"> 
         <div class="flex flex-col justify-center space-y-4">
           <CustomConfirm :isConfirm="item.isConfirm" v-for="item in items" :key="item.label" width="200"
             title="?Desea cerrar sesión?" :accept="item.command"

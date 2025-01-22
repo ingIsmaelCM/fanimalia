@@ -2,6 +2,8 @@ import { AnimalStatus } from "@/types/enums";
 import { Animal, Rule } from "@/types/types";
 import { helpers, maxLength, minLength, required } from "@vuelidate/validators";
 import { taxonomyRules } from "./taxonomy.rules";
+import { dietRules } from "./diet.rules";
+import { habitatRules } from "./habitat.rules";
 
 
 export const animalRules: Partial<Record<keyof Animal, Rule | Partial<Record<keyof Animal[keyof Animal], Rule>>>> = {
@@ -16,7 +18,7 @@ export const animalRules: Partial<Record<keyof Animal, Rule | Partial<Record<key
     description: {
         required: helpers.withMessage("La descripción es requerida", required),
         minLength: helpers.withMessage("La descripción debe tener al menos 3 caracteres", minLength(3)),
-        maxLength: helpers.withMessage("La descripción no puede tener más de 100 caracteres", (value: string) => {
+        maxLength: helpers.withMessage("La descripción no puede tener más de 1500 caracteres", (value: string= '') => {
             const innerText = value.replace(/<[^>]*>/g, '');
             return innerText.length <= 1500
         }),
@@ -39,7 +41,7 @@ export const animalRules: Partial<Record<keyof Animal, Rule | Partial<Record<key
         })
     },
     status_source: {
-        maxLength: helpers.withMessage("La fuente del estado no puede tener más de 100 caracteres", maxLength(100)),
+        maxLength: helpers.withMessage("La fuente del estado no puede tener más de 250 caracteres", maxLength(250)),
     },
     status_date: {
     },  
@@ -47,9 +49,18 @@ export const animalRules: Partial<Record<keyof Animal, Rule | Partial<Record<key
         maxLength: helpers.withMessage("La razón del estado no puede tener más de 250 caracteres", maxLength(250)),
     },
     taxonomy: {
-       ...taxonomyRules
+        $each: {
+            ...taxonomyRules
+        }
     },
-   /*  diet: {
-        ...dietRules
-    }, */
+    diet: {
+        $each: {
+            ...dietRules
+        }
+    },
+    habitat: {
+        $each: {
+            ...habitatRules
+        }
+    }
 }

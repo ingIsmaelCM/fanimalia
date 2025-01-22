@@ -1,10 +1,11 @@
 <template>
-    <CustomDialog :key="key" title="Subir archivo" class="!w-[95vw] md:!w-full md:!max-w-2xl">
+    <CustomDialog :key="key" title="Subir archivo" class="!w-[95vw] md:!w-full md:!max-w-2xl" :showBack="true"
+    appendTo="self">
         <template #button>
             <slot name="button" />
         </template>
         <div class="extraOutline p-4 bg-secondary w-full m-auto md:min-w-[35rem] rounded-lg" @drop.prevent="onDrop" @dragover="onDragPrevent">
-            <input class="text-sm cursor-pointer w-36 hidden" type="file" :accept="accept" :id="inputId"
+            <input class="text-sm cursor-pointer  hidden" type="file" :accept="accept" :id="inputId"
                 @change="uploadFile" ref="fileInput" />
             <template v-if="!selectedFile">
                 <div class="file_upload p-5 relative border-4 border-dotted border-gray-500 rounded-lg "
@@ -109,7 +110,9 @@ const uploadFile = (event: Event) => {
 }
 
 const onDrop = (event: DragEvent) => {
+    event.preventDefault();
     const file = event.dataTransfer?.files[0];
+    console.log(event);
     onSelectFile(file);
 }
 

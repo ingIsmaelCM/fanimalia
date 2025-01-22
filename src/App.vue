@@ -48,9 +48,7 @@ router.afterEach((to) => {
         document.title = "Animalia";
     }
 })
-router.beforeEach(() => {
-    document.startViewTransition && document.startViewTransition()
-})
+
 const toastIcons = ref({
     'success': "line-md:check-all",
     'info': "line-md:alert-circle",

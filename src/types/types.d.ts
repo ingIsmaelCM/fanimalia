@@ -168,6 +168,7 @@ export type Notification = {
 }
 
 export type Rule = {
+    _id?: any,
     required?: ValidationRuleWithParams,
     minLength?: ValidationRuleWithParams,
     maxLength?: ValidationRuleWithParams,
@@ -176,7 +177,8 @@ export type Rule = {
     isPhone?: ValidationRuleWithParams,
     minValue?: ValidationRuleWithParams,
     maxValue?: ValidationRuleWithParams,
-    isValidDependency?: ValidationRuleWithParams
+    isValidDependency?: ValidationRuleWithParams,
+    $each?: Rule
 }
 
 
@@ -207,6 +209,7 @@ export type QueryParams = {
     search?: string;
     filters?: FilterString[];
     relations?: string;
+    inFilter?: string;
 }
 
 export type Token = {

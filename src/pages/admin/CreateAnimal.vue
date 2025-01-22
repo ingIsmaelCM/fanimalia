@@ -30,32 +30,55 @@
             <FloatLabel class="col-span-6 xl:col-span-4">
                 <Calendar class="!w-full" inputClass="!w-full !py-2.5" :touchUI="false" id="status_date"
                     v-model="newAnimal.status_date" @focus="$v.status_date?.$reset()" />
-                <ValidationMessage :validator="$v" property="status_date"
-                    placeholder="Fecha de actualización" />
+                <ValidationMessage :validator="$v" property="status_date" placeholder="Fecha de actualización" />
             </FloatLabel>
             <FloatLabel class="col-span-12 xl:col-span-8 relative">
-                <InputText class="w-full" v-model="newAnimal.status_source" id="status_source"
-                    @focus="$v.status_source?.$reset()" />
-                <ValidationMessage :validator="$v" property="status_source" placeholder="Causas del estado actual" />
+                <InputText class="w-full" v-model="newAnimal.status_reason" id="status_reason"
+                    @focus="$v.status_reason?.$reset()" />
+                <ValidationMessage :validator="$v" property="status_reason" placeholder="Causas del estado actual" />
             </FloatLabel>
 
             <FloatLabel class="col-span-6 md:col-span-4 xl:col-span-4">
                 <Dropdown id="taxonomy" class="!w-full" inputClass="!py-2" size="large" v-model="newAnimal.taxonomy"
                     :options="taxonomies" optionValue="value" optionLabel="label" filter :auto-filter-focus="true"
-                    @focus="$v.taxonomy?.$reset()" show-clear>
+                    :class="{ '!ring-2 !ring-red-400': $v.taxonomy?.$error }" @focus="$v.taxonomy?.$reset()" show-clear>
                     <template #header>
                         <CreateTaxonomy :validation="$v" :prev-taxonomy="newAnimal.taxonomy"
-                            @onUpdateTaxonomy="onUpdateTaxonomy" />
+                            @onUpdateDependency="(taxo: Taxonomy) => onUpdateDependency().onTaxonomy(taxo)" />
                     </template>
                 </Dropdown>
                 <ValidationMessage :validator="$v" property="taxonomy" placeholder="Taxón del animal" />
             </FloatLabel>
-            <div class="col-span-6 md:col-span-4 items-center xl:col-span-2 flex ">
+            <FloatLabel class="col-span-6 md:col-span-4 xl:col-span-4">
+                <Dropdown id="habitat" class="!w-full " inputClass="!py-2" size="large" v-model="newAnimal.habitat"
+                    :options="habitats" optionValue="value" optionLabel="label" filter :auto-filter-focus="true"
+                    :class="{ '!ring-2 !ring-red-400': $v.habitat?.$error }" @focus="$v.habitat?.$reset()" show-clear>
+                    <template #header>
+                        <CreateHabitat :validation="$v" :prev-habitat="newAnimal.habitat"
+                            @onUpdateDependency="(habit: Habitat) => onUpdateDependency().onHabitat(habit)" />
+                    </template>
+                </Dropdown>
+                <ValidationMessage :validator="$v" property="habitat" placeholder="Hábitat del animal" />
+            </FloatLabel>
+            <FloatLabel class="col-span-6 md:col-span-4 xl:col-span-4">
+                <Dropdown id="diet" class="!w-full" inputClass="!py-2" size="large" v-model="newAnimal.diet"
+                    :options="diets" optionValue="value" optionLabel="label" filter :auto-filter-focus="true"
+                    :class="{ '!ring-2 !ring-red-400': $v.diet?.$error }" @focus="$v.diet?.$reset()" show-clear>
+                    <template #header>
+                        <CreateDiet :validation="$v" :prev-diet="newAnimal.diet"
+                            @onUpdateDependency="(diet: Diet) => onUpdateDependency().onDiet(diet)" />
+                    </template>
+                </Dropdown>
+                <ValidationMessage :validator="$v" property="diet" placeholder="Dieta del animal" />
+            </FloatLabel>
+            <div class="col-span-6 md:col-span-4 items-center xl:col-span-4 flex ">
                 <SingleUpload class="w-full" accept="image/*" @onUpload="onUpload">
                     <template #button>
-                        <Button severity="contrast" class="w-full  text-white px-4 py-4 rounded-lg"
-                            :class="uploadLabel != defaultUploadLabel ? 'bg-transparent ring-2 ring-secondary ring-offset-1 ' : 'bg-secondary'"
-                            @mouseover="onHoverFileLabel" @mouseleave="onHoverFileLabel">
+                        <Button severity="contrast" class=" text-white px-4 py-4 rounded-lg w-full" :class="{
+                            'border-2 border-red-500': $v.image?.$error,
+                            'bg-transparent ring-2 ring-secondary ring-offset-1 ': uploadLabel != defaultUploadLabel,
+                            'bg-secondary ring-1 ring-primary ring-offset-1': uploadLabel == defaultUploadLabel
+                        }" @mouseover="onHoverFileLabel" @mouseleave="onHoverFileLabel">
                             <div class="ellipsis">
                                 {{ uploadLabel }}
                             </div>
@@ -66,43 +89,52 @@
             <div class="col-span-12">
                 <ValidationMessage :validator="$v" property="description" placeholder="Descripción del animal" />
                 <EditorBox id="description" class="w-full" maxHeight="20rem" v-model="newAnimal.description"
-                    :validator="$v" field="description" :maxLength="1500" />
+                    :validator="$v" field="description" :maxLength="1500" :key="`${key}`+newAnimal._id" />
             </div>
             <div class="col-span-12 flex justify-end">
                 <Button
                     class="w-full md:w-max bg-primary text-secondary font-bold uppercase px-4 py-3 flex space-x-2 items-center"
                     severity="contrast" @click="onSubmitForm">
                     <IconAction action="save" icon="mdi:content-save-check-outline" class="text-2xl text-secondary" />
-                    <span>Registrar</span>
+                    <span>{{newAnimal._id ? 'Actualizar' : 'Registrar'}}</span>
                 </Button>
             </div>
         </form>
     </div>
 </template>
 <script setup lang="ts">
+import CreateDiet from '@/components/animal/CreateDiet.vue';
+import CreateHabitat from '@/components/animal/CreateHabitat.vue';
 import CreateTaxonomy from '@/components/animal/CreateTaxonomy.vue';
-import SingleUpload from '@/components/common/SingleUpload.vue';
 import { animalRules } from '@/rules/animal.rules';
 import useAnimal from '@/services/animal.service';
 import useCategory from '@/services/category.service';
-import useTaxonomy from '@/services/taxonomy.service';
+import useDependency from '@/services/dependency.service';
 import { AnimalStatus } from '@/types/enums';
-import { Animal, Photo, Selectable, Taxonomy } from '@/types/types';
+import { Animal, Diet, Habitat, Photo, Taxonomy } from '@/types/types';
 import useVuelidate from '@vuelidate/core';
-import { onMounted, Ref, ref } from 'vue';
+import { onMounted, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
 
-const { newAnimal, saveAnimal } = useAnimal();
+const { newAnimal, saveAnimal, findAnimal } = useAnimal();
 const { categories, getCategories, query: catQuery } = useCategory();
-const { getTaxonomies } = useTaxonomy();
+
+const route = useRoute();
+const router = useRouter();
+
+const { getTaxonomies, onUpdateTaxonomy, taxonomies } = useDependency();
+const { getHabitats, onUpdateHabitat, habitats } = useDependency();
+const { getDiets, onUpdateDiet, diets } = useDependency();
+
 const statuses = ref(Object.values(AnimalStatus));
-const taxonomies: Ref<Selectable<Taxonomy>[]> = ref([]);
 
 
+const key = ref(0);
 
+const animalId = route.params.id;
 
 const $v = useVuelidate(animalRules, newAnimal);
-console.log(animalRules);
 
 const defaultUploadLabel = ref('Seleccione una foto');
 const uploadLabel = ref(defaultUploadLabel.value);
@@ -119,21 +151,20 @@ const onUpload = (photo: Photo | null) => {
     uploadLabel.value = `${fileNameEllipsis}.${photo.extension}`;
 }
 
-const onUpdateTaxonomy = (taxonomy: Taxonomy) => {
-    newAnimal.value.taxonomy = taxonomy;
-    if (Object.keys(taxonomy).length <= 1) {
-        return
-    }
-    if (!taxonomies.value.find((row) => row.value._id === taxonomy._id)) {
-        taxonomies.value.push({ value: taxonomy, label: taxonomy.specie || 'Nuevo Taxón' });
-    } else {
-        taxonomies.value = taxonomies.value.map((row) => {
-            if (row.value._id === taxonomy._id) {
-                row.value = taxonomy;
-                row.label = taxonomy.specie || 'Nuevo Taxón';
-            }
-            return row;
-        })
+const onUpdateDependency = () => {
+    return {
+        onTaxonomy: (taxonomy: Taxonomy) => {
+            newAnimal.value.taxonomy = taxonomy;
+            onUpdateTaxonomy(taxonomy);
+        },
+        onHabitat: (habitat: Habitat) => {
+            newAnimal.value.habitat = habitat;
+            onUpdateHabitat(habitat);
+        },
+        onDiet: (diet: Diet) => {
+            newAnimal.value.diet = diet;
+            onUpdateDiet(diet);
+        },
     }
 }
 
@@ -141,10 +172,38 @@ onMounted(() => {
     catQuery.fields(["name", "_id"]).order("name");
     getCategories().then(() => {
     })
-    getTaxonomies().then((res) => {
-        taxonomies.value = res.map((row: { _id: string, taxonomy: Taxonomy }) =>
-            ({ value: row.taxonomy, label: row.taxonomy.specie }));
-    })
+    getTaxonomies();
+    getHabitats();
+    getDiets();
+    if (animalId) {
+        findAnimal(animalId as string).then((res) => {
+            newAnimal.value = {
+                _id: res._id,
+                name: res.name,
+                scientific_name: res.scientific_name,
+                description: res.description,
+                image: res.image,
+                categoryId: res.categoryId,
+                status: res.status,
+                status_source: res.status_source,
+                status_reason: res.status_reason,
+               ...(res.status_date && { status_date: res.status_date }),
+                taxonomy: res.taxonomy,
+                habitat: res.habitat,
+                diet: res.diet,
+                reproduction: res.reproduction,
+                relatedIds: res.relatedIds,
+                preysId: res.preysId,
+                predatorsId: res.predatorsId,
+            };
+            if(res.image){
+                const imageName = res.image.split('/').pop();
+                const fileNameEllipsis = imageName.length > 25 ? imageName.substring(0, 25) + '[...]' : imageName.image;
+                const extension = res.image.split('.').pop();
+                uploadLabel.value = `${fileNameEllipsis}.${extension}`;
+            }
+        })
+    }
 })
 
 const onHoverFileLabel = () => {
@@ -159,12 +218,20 @@ const onHoverFileLabel = () => {
 
 const onSubmitForm = () => {
     $v.value.$touch();
+    console.log($v.value.$errors);
     if ($v.value.$invalid) {
         return
     }
     saveAnimal().then((res) => {
-        newAnimal.value = {} as Animal;
-        console.log('saved: ', res);
+        if (res.status === 201) {
+           if(animalId){
+               router.push({name: 'animal', params: {id: res._id}});
+           }
+           $v.value.$reset();
+            newAnimal.value = {} as Animal;
+            key.value = key.value + 1;
+        }
+
     })
 }
 

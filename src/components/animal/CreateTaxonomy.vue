@@ -4,7 +4,7 @@
         <template #button>
             <Button severity="contrast" class="w-full  text-white px-4 !py-5 rounded-lg flex space-x-2 items-center">
                 <IconAction action="add" class="text-2xl" />
-                <span>Añadir Taxón</span>
+                <span>{{ taxonomy.specie ? 'Editar Taxón' : 'Añadir Taxón' }}</span>
             </Button>
         </template>
         <form class="grid grid-cols-12 gap-x-4 gap-y-8 md:gap-y-12 py-8 text-primary ">
@@ -49,7 +49,7 @@ interface Props {
 }
 
 
-const emits = defineEmits(['onUpdateTaxonomy'])
+const emits = defineEmits(['onUpdateDependency'])
 const props = defineProps<Props>()
 
 const validation = useVuelidate(taxonomyRules, taxonomy);
@@ -62,7 +62,7 @@ watch(taxonomy.value, () => {
     if (validation.value.$invalid) {
         return
     }
-    emits('onUpdateTaxonomy', taxonomy.value);
+    emits('onUpdateDependency', taxonomy.value);
 })
 
 onMounted(() => {

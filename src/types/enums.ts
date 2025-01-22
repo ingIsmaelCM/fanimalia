@@ -47,6 +47,9 @@ export enum HabitatType {
     terrestrial = "Terrestre",
     aquatic = "Acuático",
     aerial = "Aéreo",
+    terrestrial_and_aquatic = "Terrestre y Acuático",
+    terrestrial_and_aerial = "Terrestre y Aéreo",
+    aquatic_and_aerial = "Acuático y Aéreo",
     other = "Otro",
 }
 

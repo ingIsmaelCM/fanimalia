@@ -6,6 +6,17 @@
             </router-link>
 
         </template>
+        <template v-if="isMobile" #menubutton="{toggleCallback}">
+            <div class="flex space-x-4 items-center">
+                <Button role="button" tabindex="0" @click="toggleCallback"
+                rounded severity="contrast" class="!size-8"
+                    aria-haspopup="true" aria-expanded="false" aria-controls="menuBar" aria-label="Navegación"
+                    data-pc-section="button">
+                   <IconAction action="menu" icon="mdi:menu" class="text-xl" />
+                </Button>
+                <SearchBox />
+            </div>
+        </template>
         <template #item="{ item, props, hasSubmenu }">
             <router-link v-slot="{ href, navigate }" :to="item.route" custom
                 v-if="(!item.onlyMobile || isMobile) && !hasSubmenu && !item.hidden">
@@ -26,13 +37,13 @@
         </template>
         <template #end>
             <div class="flex items-center space-x-4 ">
-                <InputText placeholder="Search" type="text" class="hidden xl:block md:w-96  bg-transparent text-primary ring-primary ring-opacity-40
-                placeholder:text-primary placeholder:text-opacity-80 focus:ring-2 focus:ring-opacity-60 rounded-md"
-                    @focus="opacityNavbar(true)" @blur="opacityNavbar(false)" />
+                <div class="hidden md:block">
+                    <SearchBox />
+                </div>
                 <AuthContainer v-if="!useUserStore().getToken">
                     <template #button>
                         <Avatar shape="circle"
-                            class="cursor-pointer md:hover:scale-105 transition-all ease-in-out bg-secondary" >
+                            class="cursor-pointer md:hover:scale-105 transition-all ease-in-out bg-secondary">
                             <template #icon>
                                 <IconAction action="add" icon="mdi:account-circle-outline" class=" text-4xl" />
                             </template>
@@ -52,19 +63,12 @@ import AuthContainer from "./auth/AuthContainer.vue";
 import { useUserStore } from "@/stores";
 import { UserRole } from "@/types/enums";
 import ProfileComponent from "./auth/ProfileComponent.vue";
+import SearchBox from "./SearchBox.vue";
+import IconAction from "./common/IconAction.vue";
 
 const isMobile = inject('isMobile');
 
-const opacityNavbar = (state: boolean) => {
-    const navbarDiv = document.getElementById("navbarDiv");
-    if (navbarDiv) {
-        if (state) {
-            navbarDiv.style.backgroundColor = "rgba(0, 0, 0, 1)";
-        } else {
-            navbarDiv.style.backgroundColor = "rgba(0, 0, 0, 0)";
-        }
-    }
-};
+
 
 const items = computed(() => [
     {

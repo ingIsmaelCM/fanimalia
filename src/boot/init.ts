@@ -7,6 +7,7 @@ import IconAction from "@/components/common/IconAction.vue";
 import EditorBox from "@/components/common/EditorBox.vue";
 import ValidationMessage from "@/components/common/ValidationMessage.vue";
 import InputEmail from "@/components/common/InputEmail.vue";
+import SingleUpload from "@/components/common/SingleUpload.vue";
 
 
 
@@ -18,7 +19,7 @@ export default function (app: App<Element>) {
     .component('HelperMaxlength', HelperMaxlength)
     .component('IconAction', IconAction)
     .component('EditorBox', EditorBox)
-    .component("InputEmail", InputEmail);
+    .component("InputEmail", InputEmail)
+    .component("SingleUpload", SingleUpload)
   
 }
-/* COmentario */

@@ -10,9 +10,9 @@ export default {
       "rounded-md rounded-lg",
 
       // Color
-      "bg-gray-50 dark:bg-gray-700",
-      "text-gray-700 dark:text-gray-200/80",
-      "ring-1 ring-inset ring-gray-300 dark:ring-gray-700 ring-offset-0",
+      "bg-transparent",
+      "text-primary",
+      "ring-0 ring-inset ring-gray-300 dark:ring-gray-700 ring-offset-0",
     ],
   },
   legend: ({ props }) => ({
@@ -28,9 +28,8 @@ export default {
       "rounded-md",
 
       // Color
-      "text-gray-700 dark:text-gray-200/80",
+      "text-primary bg-transparent",
 
-      "bg-gray-50 dark:bg-gray-700",
 
       // Transition
       "transition-none",
@@ -38,7 +37,7 @@ export default {
       // States
       { "": props.toggleable },
       {
-        "focus:outline-none focus:outline-offset-0 focus:ring-2 focus:ring-primary-600 ring-inset dark:focus:ring-primary-500":
+        "focus:outline-none focus:outline-offset-0 focus:ring-2 focus:ring-primary ring-inset dark:focus:ring-primary-500":
           props.toggleable,
       },
     ],
@@ -56,13 +55,10 @@ export default {
       { "rounded-md": props.toggleable },
 
       // Color
-      {
-        "text-gray-700 dark:text-gray-200 hover:text-gray-900 hover:text-gray-900":
-          props.toggleable,
-      },
+        "text-primary",
 
       // States
-      { "hover:text-gray-900 dark:hover:text-gray-100": props.toggleable },
+      { "hover:text-gray-200": props.toggleable },
       {
         "focus:outline-none focus:outline-offset-0 focus:ring-2 focus:ring-inset focus:ring-primary-600 dark:focus:ring-primary-500":
           props.toggleable,

@@ -20,6 +20,7 @@ export default class QueryService {
     search: "",
     page: 0,
     pageSize: 1000,
+    inFilter: ""
   });
 
   private _pagination: Ref<IPagination> = ref({
@@ -129,6 +130,13 @@ export default class QueryService {
     return this;
   }
 
+  inFilter(column: string, value: Array<string | number | boolean>): QueryService {
+    const filt = `${column}:${value.join(",")}`;
+    this._params.value.inFilter = filt;
+    return this;
+
+  }
+
   replaceFilter(
     column: string,
     value: FilterString,
@@ -138,7 +146,7 @@ export default class QueryService {
     const filt: FilterString = `${column}:${value}:${operator}:${union}`;
     const filtered: FilterString[] = this._params.value.filters?.filter(
       (f) => !f.includes(column)
-    )||[];
+    ) || [];
     this._params.value.filters = [...filtered, filt];
     return this;
   }
@@ -146,11 +154,11 @@ export default class QueryService {
   removeFilter(column: string) {
     const filtered: FilterString[] = this._params.value.filters?.filter(
       (f) => !f.includes(column)
-    )||[];
+    ) || [];
     this._params.value.filters = [...filtered];
     return this;
   }
- 
+
   include(include: string): QueryService {
     this._params.value.relations = include;
     return this;
@@ -161,7 +169,7 @@ export default class QueryService {
     this._params.value.page && (this._params.value.page = 1);
     return this;
   }
- 
+
   private parseFilter(): string {
     return (
       this._params.value.filters?.map((item) => `filter[]=${item}`).join("&") ||

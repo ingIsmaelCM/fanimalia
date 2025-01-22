@@ -10,7 +10,7 @@
                 </div>
                 <section>
                     <transition name="slide-fade" mode="out-in" appear class="size-full p-4">
-                        <component class="" :is="Component" />
+                        <component class="" :is="Component" :key="$route.fullPath" />
                     </transition>
                 </section>
             </router-view>
@@ -29,7 +29,7 @@ const handleScroll = () => {
     const homeParallax = document.getElementById("home-parallax");
     const scrollY =container?.scrollTop || 0;
     const maxOpacity = 1; 
-    const opacity = Math.min(scrollY / 500, maxOpacity); // Ajusta '500' según el scroll deseado
+    const opacity = Math.min(scrollY / 50, maxOpacity); 
     if (navbar.value) {
         navbar.value.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`;
     }

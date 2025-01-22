@@ -1,4 +1,4 @@
-import { useGlobalStore } from "@/stores";
+import { useGlobalStore, useUserStore } from "@/stores";
 import axios from "axios";
 
 const api = axios.create({
@@ -16,7 +16,12 @@ api.defaults.withCredentials = true;
 
 api.interceptors.response.use(
   async (res) => {
-  
+    const cookies = document.cookie.split(";");
+    const isAuth = cookies.find((cookie) => cookie.trim().startsWith("isAuth"))?.split("=")[1];
+    if (!Boolean(isAuth)) {
+      localStorage.removeItem(`${import.meta.env.VITE_LOCAL_PREFIX}Remember`);
+      useUserStore().removeUser();
+    }
     return res;
   },
   (error: any) => {

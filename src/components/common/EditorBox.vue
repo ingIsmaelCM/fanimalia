@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import useApp from '@/services/app.service';
 import { Validation } from '@vuelidate/core';
-import { computed, Ref, ref } from 'vue';
+import { computed, onMounted, Ref, ref } from 'vue';
 
 
 interface IProps {
@@ -40,9 +40,13 @@ const initEditor = ({ instance }: any) => {
 const contentLength = computed(() => {
     if (editorBox.value && value.value) {
         const { quill } = editorBox.value;
-        return quill.getLength()
+        return quill?.getLength() || 0;
     }
     return 0;
+})
+
+onMounted(() => {
+    value.value = props.modelValue;
 })
 
 </script>

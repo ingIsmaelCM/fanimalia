@@ -10,7 +10,13 @@
             class=" col-span-12 md:col-span-8 flex flex-col justify-start p-0 px-2 pb-4 md:px-0 pt-[5rem] md:pt-0 md:pl-4 md:pr-8 md:py-0 transition-all duration-700 ease-in-out ">
             <div class="flex flex-col justify-end  top-0 bg-opacity-40 
                 bg-left-top bg-no-repeat bg-cover">
+               <div class="flex justify-between items-center">
                 <h1 class="text-2xl md:text-3xl font-bold text-accent z-10">{{ animal.name }}</h1>
+                <Button v-if="hasAnyRole([UserRole.admin, UserRole.editor])"
+                severity="contrast" @click="$router.push({name: 'admin_animals_edit', params: {id: animal._id}})">
+                    <IconAction action="edit"  class="text-2xl" />
+                </Button>
+               </div>
                 <h2 class="text-xl md:text-2xl font-semibold italic z-10">{{ animal.scientific_name }}</h2>
             </div>
             <div class="w-full px-2 pt-4 md:px-0 ">
@@ -23,10 +29,18 @@
                     <AnimalInformation :animal="animal" />
                 </TabPanel>
                 <TabPanel header="Taxón">
-                    <AnimalTaxonomy />
+                    <AnimalTaxonomy v-if="animal.taxonomy" :taxonomy="animal.taxonomy" />
+                    <div v-else class="flex flex-col items-center justify-center w-full h-full">
+                        <Icon icon="mdi:image-off-outline" class="text-primary text-8xl opacity-70" />
+                        <h1 class="text-primary text-2xl">No hay información</h1>
+                    </div>
                 </TabPanel>
                 <TabPanel header="Hábitat">
-                    <AnimalHabitat />
+                    <AnimalHabitat v-if="animal.habitat"  :habitat="animal.habitat" />
+                    <div v-else class="flex flex-col items-center justify-center w-full h-full">
+                        <Icon icon="mdi:image-off-outline" class="text-primary text-8xl opacity-70" />
+                        <h1 class="text-primary text-2xl">No hay información</h1>
+                    </div>
                 </TabPanel>
                 <TabPanel header="Alimentación">
                     <AnimalDiet />
@@ -37,16 +51,19 @@
                 <TabPanel header="Relacionados">
                     <AnimalRelated />
                 </TabPanel>
+                <TabPanel header="Galería">
+                    <AnimalGallery />
+                </TabPanel>
             </TabView>
             <Accordion class="md:hidden mt-6 px-2 md:p-0">
                 <AccordionTab header="Detalles">
                     <AnimalInformation :animal="animal" />
                 </AccordionTab>
                 <AccordionTab header="Taxón">
-                    <AnimalTaxonomy />
+                    <AnimalTaxonomy v-if="animal.taxonomy"  :taxonomy="animal.taxonomy"/>
                 </AccordionTab>
                 <AccordionTab header="Hábitat">
-                    <AnimalHabitat />
+                    <AnimalHabitat v-if="animal.habitat" :habitat="animal.habitat" />
                 </AccordionTab>
                 <AccordionTab header="Alimentación">
                     <AnimalDiet />
@@ -56,6 +73,9 @@
                 </AccordionTab>
                 <AccordionTab header="Relacionados">
                     <AnimalRelated />
+                </AccordionTab>
+                <AccordionTab header="Galería">
+                    <AnimalGallery />
                 </AccordionTab>
             </Accordion>
 
@@ -67,12 +87,15 @@
 
 <script setup lang="ts">
 import AnimalDiet from '@/components/animal/AnimalDiet.vue';
+import AnimalGallery from '@/components/animal/AnimalGallery.vue';
 import AnimalHabitat from '@/components/animal/AnimalHabitat.vue';
 import AnimalInformation from '@/components/animal/AnimalInformation.vue';
 import AnimalRelated from '@/components/animal/AnimalRelated.vue';
 import AnimalReproduction from '@/components/animal/AnimalReproduction.vue';
 import AnimalTaxonomy from '@/components/animal/AnimalTaxonomy.vue';
 import useAnimal from '@/services/animal.service';
+import { hasAnyRole } from '@/services/auth.middleware';
+import { UserRole } from '@/types/enums';
 import {  onMounted, ref} from 'vue';
 import { useRoute } from 'vue-router';
 

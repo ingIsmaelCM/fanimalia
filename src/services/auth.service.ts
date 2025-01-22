@@ -58,7 +58,6 @@ export default function useAuth() {
 
   const logout = () => {
     localStorage.removeItem(`${import.meta.env.VITE_LOCAL_PREFIX}Remember`);
-    console.log('logout')
     useUserStore().removeUser();
   }
 

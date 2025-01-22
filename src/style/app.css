@@ -197,6 +197,23 @@ body {
 
 .p-tabview-panels {
     @apply !bg-transparent h-[90%] px-0;
+    animation: animate-panel 1s ease-in-out;
+}
+
+.p-tabview-panel {
+    animation: animate-panel 1s ease-in-out;
+}
+
+@keyframes animate-panel {
+    0% {
+        transform: translateX(2%);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 .p-tabview-nav-container {
@@ -259,11 +276,3 @@ body {
     position: initial;
 }
 
-.image {
-    view-transition-name: image;
-}
-
-::view-transition-group(image) {
-    transition: transform 0.6s ease-in-out;
-    transform-origin: center;
-}

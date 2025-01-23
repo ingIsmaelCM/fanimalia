@@ -150,12 +150,15 @@ export type CurrentModal = {
 
 
 export type APIResponse<T> = {
-    count: number
+    currentPage: 0,
+    lastPage: 0,
+    nextPage: 0,
+    prevPage: 0,
+    count: 0,
+    pageSize: 0,
+    inThisPage: 0,
     rows: T[]
-    lastPage: number | null
-    nextPage: number | null
-    prevPage: number | null
-    currentPage: number
+    
 }
 
 export type Notification = {

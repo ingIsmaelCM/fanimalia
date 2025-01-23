@@ -25,7 +25,7 @@
             </p>
             <h1 class="col-span-6 md:col-span-2 text-accent">Fuente:</h1>
             <p
-                class="col-span-6 md:col-span-4 text-sm md:text-base font-semibold text-primary  line-clamp-2 md:line-clamp-1">
+                class="col-span-6 md:col-span-4 text-sm md:text-base font-semibold  line-clamp-2 md:line-clamp-1">
                 <span v-html="utils.linkFromString(animal.status_source || 'Sin información')"></span>
             </p>
         </div>

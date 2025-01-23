@@ -23,7 +23,7 @@ export enum UserRole {
 
 export enum AnimalStatus {
     extinct = "Extinto",
-    extinct_in_the_wild = "Extinto en el vida silvestre",
+    extinct_in_the_wild = "Extinto en la vida silvestre",
     critically_endangered = "En peligro crítico",
     endangered = "En peligro",
     vulnerable = "Vulnerable",

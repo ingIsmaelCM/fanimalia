@@ -266,7 +266,7 @@ export default {
     if (match) {
       const url = match[0];
       const text = str.replace(urlRegex, '').trim() || url;
-      return `<a href="${url}" target="_blank" class="hover:text-accent hover:underline hover:font-normal " rel="noopener noreferrer">${text}</a>`;
+      return `<a href="${url}" target="_blank" class="text-accent opacity-80 hover:opacity-100  hover:text-accent hover:underline hover:font-normal " rel="noopener noreferrer">${text}</a>`;
     } else {
       return `<span>${str || 'Sin información'}</span>`;
     }
@@ -288,7 +288,7 @@ export default {
   },
   getDangerIcon: (level: number): { color: string, icon: string } => {
     if (level <= 3) return {
-      color: 'text-green-500',
+      color: '!text-green-500',
       icon: 'mdi:check-all'
     }
     if (level <= 6) return {
@@ -297,7 +297,7 @@ export default {
     }
     return {
       color: 'text-red-500',
-      icon: 'mdi:dangerous'
+      icon: 'mdi:warning-outline'
     }
 
   }

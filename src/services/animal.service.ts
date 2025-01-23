@@ -15,15 +15,16 @@ export default function useAnimal() {
     const newAnimal: Ref<Animal> = ref({} as Animal);
 
     const toast = useToast();
+    query.order('name')
 
     const getAnimals = async () => {
-
         return await animalRepo.get(query.parsed.value).then((res) => {
             if (query.parsed.value.includes('sortBy=random')) {
                 res.data.rows.sort(() => Math.random() - 0.5);
             }
             animals.value = res.data.rows;
-            return res.data.rows;
+            const {rows, ...pagination}=res.data
+            return {rows, pagination};
         }).catch((err) => {
             utils.toastError(toast, 'Error al obtener los animales');
             throw err;

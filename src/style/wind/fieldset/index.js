@@ -18,7 +18,7 @@ export default {
   legend: ({ props }) => ({
     class: [
       // Font
-      "font-medium",
+      "font-medium w-full",
       "leading-none",
 
       //Spacing
@@ -45,7 +45,7 @@ export default {
   toggler: ({ props }) => ({
     class: [
       // Alignments
-      "flex items-center justify-center",
+      "flex items-center justify-center w-full",
       "relative",
 
       //Spacing
@@ -55,7 +55,7 @@ export default {
       { "rounded-md": props.toggleable },
 
       // Color
-        "text-primary",
+        "text-primary ",
 
       // States
       { "hover:text-gray-200": props.toggleable },

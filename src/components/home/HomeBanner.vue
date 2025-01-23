@@ -1,5 +1,5 @@
 <template>
-    <el-carousel class="w-full h-full min-h-96" indicator-position="none" :type="isMobile ? '' : 'card'"
+    <el-carousel class="w-full h-full min-h-96 md:min-h-[28rem]" indicator-position="none" :type="isMobile ? '' : 'card'"
         :autoplay="false">
         <el-carousel-item v-for="animal in animals" :key="animal._id" @click="emit('onSelectAnimal', animal._id)">
             <div

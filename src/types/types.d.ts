@@ -24,15 +24,16 @@ export type IFilterDate = {
     label: string;
 }
 
-export type IAuth ={
-  username: string;
-  password: string;
-  rememberMe: boolean;
+export type IAuth = {
+    username: string;
+    password: string;
+    rememberMe: boolean;
 }
 
 export type IRegister = Omit<IAuth, 'rememberMe'> & {
-  email: string;
-  role: UserRole;
+    name: string;
+    email: string;
+    role: UserRole;
 }
 
 
@@ -158,7 +159,7 @@ export type APIResponse<T> = {
     pageSize: 0,
     inThisPage: 0,
     rows: T[]
-    
+
 }
 
 export type Notification = {

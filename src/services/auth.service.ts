@@ -4,6 +4,7 @@ import { useToast } from "primevue/usetoast";
 import utils from "@/types/helpers/utils";
 import AuthRepository from "@/repositories/auth.repository";
 import { IAuth, IRegister } from "@/types/types";
+import { EAxiosVerb } from "@/types/enums";
 
 
 
@@ -57,8 +58,10 @@ export default function useAuth() {
   }
 
   const logout = () => {
-    localStorage.removeItem(`${import.meta.env.VITE_LOCAL_PREFIX}Remember`);
-    useUserStore().removeUser();
+    authRepo.logout().then(()=>{
+      localStorage.removeItem(`${import.meta.env.VITE_LOCAL_PREFIX}Remember`);
+      useUserStore().removeUser();
+    })
   }
 
 

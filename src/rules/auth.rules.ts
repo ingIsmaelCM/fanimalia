@@ -13,8 +13,14 @@ export const authRules: Record<keyof IAuth, Rule> = {
 }
 
 export const registerRules: Record<keyof IRegister, Rule> = {
+    name: {
+        required: helpers.withMessage("Ingrese su nombre", required),
+    },
     username: {
         required: helpers.withMessage("Ingrese un nombre de usuario", required),
+        isIn: helpers.withMessage('No se aceptan espacios', (value: string) => {
+            return !value.includes(' ')
+        })
     },
     password: {
         required: helpers.withMessage("Ingrese una contraseña", required),

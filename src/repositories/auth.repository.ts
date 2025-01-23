@@ -13,6 +13,13 @@ export default class AuthRepository extends Repository<any> {
         );
     }
 
+    async logout(): Promise<any> {
+        return this.safeRun(
+            async () =>
+                await this.custom(this.endpoint + "/logout", EAxiosVerb.Post)
+        );
+    }
+
 
     async register(data: IRegister): Promise<any> {
         return this.safeRun(
@@ -20,4 +27,5 @@ export default class AuthRepository extends Repository<any> {
                 await this.custom(this.endpoint + "/register", EAxiosVerb.Post, data)
         );
     }
+    
 }

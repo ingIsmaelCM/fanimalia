@@ -37,9 +37,8 @@ export default class SocketService {
     }
 
     static getInstance() {
-        if (!SocketService.instance) {
-            const auth = useUserStore().getUser;
-            if (SocketService.connected.has(auth._id)) return SocketService.instance
+        const auth = useUserStore().getUser;
+        if (!SocketService.instance || (auth && !SocketService.connected.has(auth?._id))) {
             new SocketService();
         }
         return SocketService.instance;

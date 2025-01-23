@@ -3,7 +3,12 @@
         <img :src="logo" alt="logo" class="h-6 md:h-8 " />
         <form class="flex flex-col pt-4 w-full" @submit.prevent="onSubmit">
             <FloatLabel class="my-6 relative">
-                <InputText class="w-full" v-model="formData.email" id="email" @focus="validation.email?.$reset()"
+                <InputText class="w-full" v-model="formData.name" id="name" @focus="validation.name?.$reset()"
+                   aria-label="Nombre completo" aria-hidden="true" />
+                <ValidationMessage :validator="validation" property="name" placeholder="Nombre completo" />
+            </FloatLabel>
+            <FloatLabel class="my-6 relative">
+                <InputText type="email" class="w-full" v-model="formData.email" id="email" @focus="validation.email?.$reset()"
                     role="email" aria-label="Correo Electrónico" aria-hidden="true" />
                 <ValidationMessage :validator="validation" property="email" placeholder="Correo Electrónico" />
             </FloatLabel>
@@ -41,6 +46,7 @@ import { UserRole } from "@/types/enums";
 import useAuth from "@/services/auth.service";
 
 const formData: Ref<IRegister> = ref({
+    name:'',
     username: '',
     password: '',
     email: '',

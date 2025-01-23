@@ -8,7 +8,7 @@ import EditorBox from "@/components/common/EditorBox.vue";
 import ValidationMessage from "@/components/common/ValidationMessage.vue";
 import InputEmail from "@/components/common/InputEmail.vue";
 import SingleUpload from "@/components/common/SingleUpload.vue";
-
+import NotAnimalFound from "@/components/animal/NotAnimalFound.vue";
 
 
 export default function (app: App<Element>) {
@@ -21,5 +21,6 @@ export default function (app: App<Element>) {
     .component('EditorBox', EditorBox)
     .component("InputEmail", InputEmail)
     .component("SingleUpload", SingleUpload)
+    .component("NotAnimalFound", NotAnimalFound)
   
 }

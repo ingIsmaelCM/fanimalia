@@ -7,7 +7,7 @@
             flex flex-col md:flex-row justify-end md:items-end md:justify-start 
             bg-cover  bg-no-repeat bg-top relative overflow-hidden hover:scale-105 transition-all duration-500 ease-in-out">
                 <el-image :src="animal.image" fit="cover"
-                    class="absolute top-0 left-0 w-full h-full object-cover z-0 vt-name[prueba]" loading="lazy" />
+                    class="absolute top-0 left-0 w-full h-full object-cover z-0" loading="lazy" />
                 <div class="absolute top-0 left-0 w-full h-full bg-dark bg-opacity-70 z-10 "></div>
                 <div class="p-4 md:p-8 flex flex-col justify-center items-start  z-20">
                     <router-link :to="{ name: 'animal', params: { id: animal._id } }" class="hover:underline">

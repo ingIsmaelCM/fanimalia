@@ -25,6 +25,16 @@
 
 }
 
+@layer utilities {
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+  }
+}
+
 
 #app {
     height: 100dvh;
@@ -33,6 +43,8 @@
 
 * {
     background-color: transparent;
+    scroll-behavior: smooth;
+    
 }
 
 :root {
@@ -275,4 +287,17 @@ body {
     height: 90%;
     position: initial;
 }
+.bounce-once {
+    animation: bounce 1s 1 forwards ease-in-out;
+}
 
+@keyframes bounce {
+    0%, 100% {
+      transform: translateY(-25%);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% {
+      transform: translateY(0);
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+  }

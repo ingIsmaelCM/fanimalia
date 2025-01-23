@@ -284,6 +284,7 @@ export type Animal = CommonFields & {
     preysId: ObjectId[];
     predatorsId: ObjectId[];
     relatedIds: ObjectId[];
+    likes: ObjectId[];
     category: Category;
 }
 

@@ -3,6 +3,14 @@ import { RouteRecordRaw } from "vue-router";
 
 const animalRoutes: Array<RouteRecordRaw> = [
     {
+        path: "/animals",
+        name: "animals",
+        component: () => import("@/pages/AnimalPage.vue"),
+        meta: {
+            key: "animals",
+        },
+    },
+    {
         path: '/admin/animals',
         name: 'admin_animals_create',
         component: () => import('@/pages/admin/CreateAnimal.vue'),
@@ -29,15 +37,7 @@ const animalRoutes: Array<RouteRecordRaw> = [
             key: 'animals'
         }
     },
-    {
-        path: '/animals/all',
-        name: 'all_animals',
-        component: () => import('@/pages/AnimalGeneral.vue'),
-        meta: {
-            title: 'Animales',
-            key: 'animals'
-        }
-    },
+
 
 ]
 

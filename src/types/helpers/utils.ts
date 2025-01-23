@@ -7,6 +7,8 @@ import { ConfirmationOptions } from "primevue/confirmationoptions";
 import { ToastServiceMethods } from "primevue/toastservice";
 import { Ref } from "vue";
 import { AnimalStatus } from "../enums";
+import { useUserStore } from "@/stores";
+import { isAuth } from "@/services/auth.middleware";
 let timer: any;
 
 export default {
@@ -232,13 +234,12 @@ export default {
       life: 3000,
     });
   },
-  toastSucess(toast: ToastServiceMethods, sucessKey = 'success_op', omitTranslate: boolean = false) {
+  toastSucess(toast: ToastServiceMethods, sucessKey = 'success_op', omitTitle: boolean = false) {
     toast.add({
       severity: 'success',
-      summary: 'Acción realizada correctamente',
+      summary: omitTitle ?'': 'Acción realizada correctamente',
       detail: sucessKey,
       life: 3000,
-      omitTranslate
     } as any);
   },
 
@@ -300,6 +301,10 @@ export default {
       icon: 'mdi:warning-outline'
     }
 
+  },
+  isLiked: (likes: string[]): boolean => {
+    if (!isAuth()) return false;
+    return likes.includes(useUserStore().getUser._id);
   }
 };
 

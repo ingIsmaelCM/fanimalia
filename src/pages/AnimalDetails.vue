@@ -3,7 +3,7 @@
         <div class="col-span-12 md:col-span-4 fixed md:relative top-0 left-0 w-full image-header">
             <div class="absolute left-0 top-0 w-full z-10 bg-dark"></div>
             <el-image :src="animal.image" :alt="animal.name" fit="cover"
-                class="w-full h-56 md:h-full object-cover  z-0 md:rounded-xl image " loading="lazy" />
+                class="w-full h-56 md:h-full object-cover  z-0 md:rounded-xl  transitionable" loading="lazy" />
         </div>
 
         <div

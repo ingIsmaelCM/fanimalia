@@ -5,6 +5,7 @@ import QueryService from "./query.service";
 import utils from "@/types/helpers/utils";
 import { useToast } from "primevue/usetoast";
 import { useGlobalStore } from "@/stores";
+import { EAxiosVerb } from "@/types/enums";
 
 export default function useAnimal() {
     const animalRepo = new AnimalRepository();
@@ -16,6 +17,7 @@ export default function useAnimal() {
 
     const toast = useToast();
     query.order('name')
+    const omitTitle= ref(true);
 
     const getAnimals = async () => {
         return await animalRepo.get(query.parsed.value).then((res) => {
@@ -58,6 +60,18 @@ export default function useAnimal() {
         })
     }
 
+    const setLike = async (animalId: string, isLiked: boolean)=>{
+        return await animalRepo.custom(`animals/like/${animalId}`, EAxiosVerb.Put).then((res) => {
+            if (isLiked){
+                utils.toastSucess(toast, 'Guardado en favorito', omitTitle.value)
+            }
+            return res.data;
+        }).catch((err) => {
+            utils.toastError(toast, 'No se pudo dar like');
+            return err;
+        })
+    }
+
     return {
         animals,
         animal,
@@ -65,6 +79,7 @@ export default function useAnimal() {
         query,
         getAnimals,
         saveAnimal,
-        findAnimal
+        findAnimal,
+        setLike
     }
 }

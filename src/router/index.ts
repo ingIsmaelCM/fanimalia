@@ -20,14 +20,7 @@ const routes: Array<RouteRecordRaw> = [
           title: "Inicio"
         },
       },
-      {
-        path: "/animals",
-        name: "animals",
-        component: () => import("@/pages/AnimalPage.vue"),
-        meta: {
-          key: "animals",
-        },
-      },
+      
       {
         path: "/categories",
         name: "categories",

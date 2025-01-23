@@ -2,7 +2,7 @@
     <div class="   relative  pt-[18rem] md:pt-[30rem] grid grid-cols-1 gap-8 py-8">
         <div class="parallax absolute top-0 left-0 w-full h-1/2 flex py-4 md:p-8 md:pt-[14dvh]" v-if="animal._id"
             :key="animal._id">
-            <el-image :src="animal.image" fit="cover" class="fixed top-0 left-0 w-full h-screen z-0 image"
+            <el-image :src="animal.image" fit="cover" class="fixed top-0 left-0 w-full h-screen z-0 transitionable"
                 loading="lazy" />
             <div class="flex flex-col pt-8 md:pt-0">
                 <div class="absolute top-0 left-0 w-full h-full bg-dark bg-opacity-80 z-10 difuse "></div>
@@ -26,9 +26,10 @@
         <div class=" md:py-8 ">
             <HomeBanner :animals="animals" @onSelectAnimal="onSelectAnimal" />
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-7 gap-4 w-full">
+        <div class="grid grid-cols-2 md:grid-cols-7 gap-4 w-full h-[calc(22rem)] md:[calc(11rem)] overflow-hidden overflow-y-auto no-scrollbar">
             <CategoryCard v-for="category in categories" :key="category._id" :category="category" />
         </div>
+        <AnimalGeneral />
 
     </div>
 </template>
@@ -39,6 +40,7 @@ import useAnimal from '@/services/animal.service';
 import useCategory from '@/services/category.service';
 import { Animal } from '@/types/types';
 import { inject, onBeforeMount, ref, Ref } from 'vue';
+import AnimalGeneral from './AnimalGeneral.vue';
 
 const isMobile: Ref<boolean> = inject<Ref<boolean>>('isMobile')!;
 
@@ -55,7 +57,7 @@ onBeforeMount(() => {
     getAnimals().then(() => {
         animal.value = animals.value[0] || {} as Animal;
     })
-    catQuery.page(1).limit(isMobile.value ? 4 : 14).order("name").desc(true);
+    catQuery.page(1).limit(100);
     getCategories().then(() => {
     })
 

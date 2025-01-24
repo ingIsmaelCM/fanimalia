@@ -303,6 +303,7 @@ export type Category = CommonFields & {
     name: string;
     description: string;
     image: string;
+    animals: Animal[];
 }
 
 export type Taxonomy = {

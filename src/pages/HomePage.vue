@@ -40,7 +40,7 @@ import useAnimal from '@/services/animal.service';
 import useCategory from '@/services/category.service';
 import { Animal } from '@/types/types';
 import { inject, onBeforeMount, ref, Ref } from 'vue';
-import AnimalGeneral from './AnimalGeneral.vue';
+import AnimalGeneral from '../components/animal/AnimalGeneral.vue';
 
 const isMobile: Ref<boolean> = inject<Ref<boolean>>('isMobile')!;
 
